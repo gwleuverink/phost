@@ -8,7 +8,9 @@
         "php": "^8.2",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.4"
+        "livewire/livewire": "^3.4",
+        "react/socket": "^1.15",
+        "zbateson/mail-mime-parser": "^2.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
