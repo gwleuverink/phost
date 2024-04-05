@@ -1,5 +1,10 @@
 
-<main class="flex w-full h-screen">
+<main
+    x-on:keydown.meta.r.prevent="
+        window.location.href = '/{{ $this->message?->id }}';
+    "
+    class="flex w-full h-screen"
+>
 
 
     <section class="flex flex-col w-4/12 h-full pt-3 overflow-y-scroll bg-gray-50 min-w-80">
@@ -51,7 +56,7 @@
     @else
 
         <section wire:key="no-message" class="flex items-center justify-around w-full h-full px-4 bg-white">
-            <x-heroicon-o-envelope class="w-44 h-44 text-neutral-200" />
+            <x-heroicon-o-envelope class="size-48 text-neutral-200" stroke-width="1" />
         </section>
 
     @endif
