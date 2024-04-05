@@ -1,3 +1,5 @@
+@use('ZBateson\MailMimeParser\Header\HeaderConsts', 'Header')
+
 @props([
     'message'
 ])
@@ -11,16 +13,14 @@
     <iframe
         x-title="html-preview"
         x-data="{
-            resize: () => $nextTick(function() {
-                setTimeout(
-                    () => $el.style.height = $el.contentDocument.body?.scrollHeight +'px',
-                    10 // Might need some tweaking
-                )
-            })
+            resize: () => $nextTick(
+                () => $el.style.height = $el.contentDocument.body?.scrollHeight +'px'
+            )
         }"
         srcdoc="{{ $parsed->getHtmlContent() ?? $parsed->getTextContent() }}"
-        x-on:reload-message-preview.window="selectedTabIndex = 0; $nextTick(() => resize())"
+        x-on:reload-message-preview.window="$nextTick(() => resize())"
         x-on:resize.window.debounce="resize()"
+        x-intersect:enter="resize()"
         x-on:load="resize()"
         x-init="resize()"
         x-cloak

@@ -71,7 +71,6 @@ class Server
                                 $connection->write(Reply::Okay->value." Ok!\r\n");
 
                                 call_user_func($this->onMessageReceivedCallback, $content);
-                                // $this->onMessageReceivedCallback($content);
                                 $transferring = false;
 
                                 return false;

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Message;
+use App\Services\Smtp\Server;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
@@ -31,6 +32,7 @@ class Inbox extends Component
         $this->message?->markRead();
 
         // Not pretty, but most reliable way to ensure properly sized iframe
+        // TODO: Hook into render with alpine & dispatch there (or even on the component?)
         $this->dispatch('reload-message-preview');
     }
 
@@ -52,6 +54,23 @@ class Inbox extends Component
         $this->dispatch('reload-message-preview');
     }
 
+    public function supervisor($previousTotal)
+    {
+        // Ensure sever is running (fail silently, could be started via multiple windows)
+        rescue(
+            fn () => Server::new(2525)
+                ->onMessageReceived(fn ($content) => Message::fromContent($content))
+                ->serve()
+        );
+
+        // Skip render when no new messages
+        if ($this->inbox->count() !== $previousTotal) {
+            $this->dispatch('reload-message-preview');
+        } else {
+            $this->skipRender();
+        }
+    }
+
     #[Computed()]
     public function message(): ?Message
     {
@@ -60,7 +79,6 @@ class Inbox extends Component
         }
 
         return Message::find($this->selectedMessageId);
-
     }
 
     #[Computed()]

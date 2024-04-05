@@ -4,7 +4,6 @@
     'message'
 ])
 
-
 @php
     $parsed = $message->parsed();
 @endphp
