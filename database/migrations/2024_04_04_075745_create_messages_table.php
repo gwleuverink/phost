@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->longText('content')->charset('binary');
+            $table->boolean('bookmarked')->default(false);
             $table->dateTime('read_at')->nullable();
             $table->timestamps();
         });

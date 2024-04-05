@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Message;
+use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -16,30 +17,50 @@ class Inbox extends Component
     public function mount($selectedMessageId = null)
     {
         $this->selectedMessageId = $selectedMessageId;
+
+        $this->message?->markRead();
     }
 
-    #[Computed]
+    public function selectMessage(int $id)
+    {
+        $this->selectedMessageId = $id;
+
+        $this->message?->markRead();
+    }
+
+    public function deleteMessage(int $id)
+    {
+        Message::findOrFail($id)->delete();
+
+        if ($id === $this->selectedMessageId) {
+            $this->selectedMessageId = null;
+        }
+    }
+
+    public function toggleBookmark(int $id)
+    {
+        Message::findOrFail($id)->toggleBookmark();
+
+        $this->message?->markRead();
+    }
+
+    #[Computed()]
     public function message(): ?Message
     {
         if (! $this->selectedMessageId) {
             return null;
         }
 
-        $message = Message::find($this->selectedMessageId);
+        return Message::find($this->selectedMessageId);
 
-        if (! $message->read_at) {
-            $message->update([
-                'read_at' => now(),
-            ]);
-        }
-
-        return $message;
     }
 
-    public function render()
+    #[Computed()]
+    public function inbox(): Collection
     {
-        return view('livewire.inbox', [
-            'messages' => Message::latest()->get(),
-        ]);
+        return Message::query()
+            ->orderByDesc('bookmarked')
+            ->latest()
+            ->get();
     }
 }

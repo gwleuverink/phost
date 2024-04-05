@@ -14,51 +14,56 @@
 
     <div class="flex items-center justify-between flex-shrink-0 h-48 mb-8 border-b">
 
-        <div class="flex flex-col">
-            <h3 class="text-lg font-semibold">
-                {{ $parsed->getHeaderValue(Header::SUBJECT) }}
-            </h3>
+        <div x-data="{ open: false }" class="flex">
 
-            <p class="text-gray-400 text-light">
-                willem@gedachtegoed.nl
-            </p>
+            <button x-on:click="open = !open" class="p-2 text-gray-400 transition-colors cursor-default hover:text-neutral-500">
+                <x-heroicon-m-chevron-right class="w-5 h-5 transition-transform" ::class="{ 'rotate-90': open }" />
+            </button>
+
+            <div class="flex flex-col">
+
+
+                <h3 class="text-lg font-semibold">
+                    {{ $parsed->getHeaderValue(Header::SUBJECT) }}
+
+                    <span x-show="open" x-cloak x-transition class="mx-1 text-base font-normal text-neutral-400">
+                        &lt;{{ $parsed->getHeaderValue(Header::FROM) }}&gt;
+                    </span>
+                </h3>
+
+                <p class="text-neutral-400 text-light">
+                    To: {{ $parsed->getHeaderValue(Header::TO) }}
+                </p>
+
+            </div>
+
         </div>
 
-        <div>
+        <div class="flex space-x-4 text-neutral-400">
 
-            <ul class="flex space-x-4 text-gray-400">
+            <button class="transition-colors cursor-default hover:text-neutral-500">
+                <x-heroicon-o-arrow-left-circle class="size-6" />
+            </button>
 
-                <li class="w-6 h-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path>
-                    </svg>
-                </li>
+            <button class="transition-colors cursor-default hover:text-neutral-500">
+                <x-heroicon-o-arrow-right-circle class="size-6" />
+            </button>
 
-                <li class="w-6 h-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </li>
+            <button class="transition-colors cursor-default hover:text-neutral-500">
+                <x-heroicon-o-printer class="size-6" />
+            </button>
 
-                <li class="w-6 h-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
-                    </svg>
-                </li>
+            <button wire:click="deleteMessage({{ $message->id }})" class="transition-colors cursor-default hover:text-neutral-500 ">
+                <x-heroicon-o-trash class="size-6" />
+            </button>
 
-                <li class="w-6 h-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                    </svg>
-                </li>
-
-                <li class="w-6 h-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
-                    </svg>
-                </li>
-
-            </ul>
+            <button wire:click="toggleBookmark({{ $message->id }})" class="transition-colors cursor-default hover:text-neutral-500">
+                @if($message->bookmarked)
+                    <x-heroicon-o-bookmark class="transition-colors size-6 text-rose-500 hover:text-rose-600" fill="currentColor" />
+                @else
+                    <x-heroicon-o-bookmark class="size-6" />
+                @endif
+            </button>
 
         </div>
 
