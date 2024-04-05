@@ -56,7 +56,7 @@
                 <x-heroicon-o-arrow-right-circle class="size-6" />
             </button>
 
-            <button class="transition-colors cursor-default hover:text-neutral-500">
+            <button x-on:click="Helpers.print(@js($parsed->getHtmlContent() ?? $parsed->getTextContent()))" class="transition-colors cursor-default hover:text-neutral-500">
                 <x-heroicon-o-printer class="size-6" />
             </button>
 
@@ -94,7 +94,7 @@
                 class="px-3 py-1 transition rounded-md cursor-default"
                 x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
             >
-                    Text
+                Text
             </button>
 
             <button x-tabs:tab type="button"
