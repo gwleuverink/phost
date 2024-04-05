@@ -13,7 +13,7 @@
         x-data="{
             resize: () => $nextTick(function() {
                 setTimeout(
-                    () => $el.style.height = ($el.contentDocument.body?.scrollHeight + 45) +'px',
+                    () => $el.style.height = $el.contentDocument.body?.scrollHeight +'px',
                     10 // Might need some tweaking
                 )
             })
