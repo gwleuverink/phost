@@ -24,7 +24,7 @@
                         wire:click="selectMessage({{ $message->id }})"
                         class="w-full"
                     >
-                        <x-message-list-item
+                        <x-message.list-item
                             :$message
                             :selected="$message->id === $selectedMessageId"
                         />

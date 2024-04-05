@@ -48,6 +48,8 @@ class Inbox extends Component
         Message::findOrFail($id)->toggleBookmark();
 
         $this->message?->markRead();
+
+        $this->dispatch('reload-message-preview');
     }
 
     #[Computed()]
