@@ -6,11 +6,13 @@ use App\Models\Message;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 #[Title('Inbox')]
 class Inbox extends Component
 {
+    #[Url]
     public string $search = '';
 
     public ?int $selectedMessageId;
@@ -27,6 +29,9 @@ class Inbox extends Component
         $this->selectedMessageId = $id;
 
         $this->message?->markRead();
+
+        // Not pretty, but most reliable way to ensure properly sized iframe
+        $this->dispatch('reload-message-preview');
     }
 
     public function deleteMessage(int $id)

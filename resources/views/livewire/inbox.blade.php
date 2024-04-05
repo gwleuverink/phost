@@ -2,7 +2,7 @@
 <main class="flex w-full h-screen">
 
 
-    <section class="flex flex-col w-4/12 h-full pt-3 overflow-y-scroll bg-gray-50 min-w-72">
+    <section class="flex flex-col w-4/12 h-full pt-3 overflow-y-scroll bg-gray-50 min-w-80">
 
         <label class="px-3">
             <input wire:model.live="search" class="w-full p-4 transition duration-200 bg-gray-100 rounded-lg focus:outline-none focus:ring-2" placeholder="Search...">

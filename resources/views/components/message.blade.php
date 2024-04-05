@@ -14,7 +14,7 @@
 
     <div class="flex items-center justify-between flex-shrink-0 h-48 mb-8 border-b">
 
-        <div x-data="{ open: false }" class="flex">
+        <div x-title="header-data" x-data="{ open: false }" class="flex">
 
             <button x-on:click="open = !open" class="p-2 text-gray-400 transition-colors cursor-default hover:text-neutral-500">
                 <x-heroicon-m-chevron-right class="w-5 h-5 transition-transform" ::class="{ 'rotate-90': open }" />
@@ -72,19 +72,21 @@
     <section>
 
         <iframe
+            x-title="html-preview"
             x-data="{
                 resize: () => $nextTick(function() {
-                    $el.style.height = ($el.contentDocument.body.scrollHeight + 45) +'px'
+                    $el.style.height = ($el.contentDocument.body?.scrollHeight + 45) +'px'
                 })
             }"
             srcdoc="{{ $parsed->getHtmlContent() ?? $parsed->getTextContent() }}"
+            x-on:reload-message-preview.window="resize()"
             x-on:resize.window.debounce="resize()"
             x-on:load="resize()"
             x-init="resize()"
             x-cloak
 
             frameborder="0"
-            class="w-full"
+            class="w-full h-full"
         ></iframe>
 
     </section>
