@@ -3,4 +3,4 @@
 use App\Livewire;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', Livewire\Inbox::class);
+Route::get('/{selectedMessageId?}', Livewire\Inbox::class)->name('inbox');
