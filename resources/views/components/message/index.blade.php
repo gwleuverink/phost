@@ -76,51 +76,36 @@
 
         {{-- tab list --}}
         <nav x-tabs:list class="absolute bottom-0 flex space-x-2 text-sm text-neutral-400">
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
+            <x-message.tab-button>
                 Preview
-            </button>
+            </x-message.tab-button>
 
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
+            <x-message.tab-button>
                 Source
-            </button>
+            </x-message.tab-button>
 
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
+            <x-message.tab-button>
                 Text
-            </button>
+            </x-message.tab-button>
 
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
+            <x-message.tab-button>
                 Raw
-            </button>
+            </x-message.tab-button>
 
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
+            <x-message.tab-button>
                 Headers
-            </button>
+            </x-message.tab-button>
         </nav>
     </div>
 
     {{-- tab panels --}}
     <section x-tabs:panels x-cloak>
 
-        <x-message.tabs.preview :$message />
-        <x-message.tabs.source :$message />
-        <x-message.tabs.text :$message />
-        <x-message.tabs.raw :$message />
-        <x-message.tabs.headers :$message />
+        <x-message.panel.preview :$message />
+        <x-message.panel.source :$message />
+        <x-message.panel.text :$message />
+        <x-message.panel.raw :$message />
+        <x-message.panel.headers :$message />
 
     </section>
 
