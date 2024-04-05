@@ -9,9 +9,10 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Title('Inbox')]
-
 class Inbox extends Component
 {
+    public string $search = '';
+
     public ?int $selectedMessageId;
 
     public function mount($selectedMessageId = null)
@@ -59,6 +60,9 @@ class Inbox extends Component
     public function inbox(): Collection
     {
         return Message::query()
+            ->when($this->search, fn ($query) => $query
+                ->where('content', 'like', '%'.trim($this->search).'%')
+            )
             ->orderByDesc('bookmarked')
             ->latest()
             ->get();
