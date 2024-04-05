@@ -15,7 +15,7 @@ class Inbox extends Component
     #[Url]
     public string $search = '';
 
-    public ?int $selectedMessageId;
+    public ?int $selectedMessageId = null;
 
     public function mount($selectedMessageId = null)
     {

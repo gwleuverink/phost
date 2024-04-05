@@ -18,12 +18,10 @@
                     <button
                         wire:click="selectMessage({{ $message->id }})"
                         class="w-full"
-                        {{-- wire:navigate href="{{ route('inbox', $message->id) }}" --}}
                     >
                         <x-message-list-item
                             :$message
                             :selected="$message->id === $selectedMessageId"
-                            {{-- x-bind:class="{ '!bg-neutral-200': {{ $message->id }} === $wire.selectedMessageId }" --}}
                         />
                     </button>
 
@@ -31,8 +29,12 @@
 
             @empty
 
-                <li class="block w-full px-4 py-5 font-medium text-center text-neutral-600">
-                    Inbox zero 🎉
+                <li class="block w-full px-4 py-5 text-center text-neutral-500">
+                    @if($search)
+                        Nothing found 🙈
+                    @else
+                        Inbox zero 🎉
+                    @endif
                 </li>
 
             @endforelse
@@ -44,19 +46,13 @@
 
     @if($this->message)
 
-
         <x-message wire:key="message" :message="$this->message" />
-
 
     @else
 
-
         <section wire:key="no-message" class="flex items-center justify-around w-full h-full px-4 bg-white">
-
             <x-heroicon-o-envelope class="w-44 h-44 text-neutral-200" />
-
         </section>
-
 
     @endif
 
