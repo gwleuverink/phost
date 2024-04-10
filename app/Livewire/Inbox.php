@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Services\Smtp\Server;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Renderless;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -48,14 +49,16 @@ class Inbox extends Component
         $this->message?->markRead();
     }
 
+    #[Renderless]
     public function supervisor()
     {
+
         // Ensure sever is running (fail silently, could be started via multiple windows)
-        rescue(
-            fn () => Server::new(2525)
-                ->onMessageReceived(fn ($content) => Message::fromContent($content))
-                ->serve()
-        );
+        // rescue(
+        //     fn () => Server::new(2525)
+        //         ->onMessageReceived(fn ($content) => Message::fromContent($content))
+        //         ->serve()
+        // );
 
         // Skip render when no new messages
         // if ($this->previousInboxTotal <= $this->inbox->count()) {

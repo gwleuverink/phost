@@ -32,7 +32,7 @@ class Message extends Model
     public function parsed(): Attribute
     {
         return Attribute::make(
-            get: fn () => ParsedMessage::from($this->content, true)
+            get: fn (): ParsedMessage => ParsedMessage::from($this->content, true)
         )->shouldCache();
     }
 
