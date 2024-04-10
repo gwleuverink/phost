@@ -4,10 +4,6 @@
     'message'
 ])
 
-@php
-    $parsed = $message->parsed();
-@endphp
-
 <section {{ $attributes }}
     x-tabs
     x-title="message-view"
@@ -30,15 +26,15 @@
 
 
                 <h3 class="text-lg font-semibold">
-                    {{ $parsed->getHeaderValue(Header::SUBJECT) }}
+                    {{ $message->parsed->getHeaderValue(Header::SUBJECT) }}
 
                     <span x-show="open" x-cloak x-transition class="mx-1 text-base font-normal text-neutral-400">
-                        &lt;{{ $parsed->getHeaderValue(Header::FROM) }}&gt;
+                        &lt;{{ $message->parsed->getHeaderValue(Header::FROM) }}&gt;
                     </span>
                 </h3>
 
                 <p class="text-neutral-400 text-light">
-                    To: {{ $parsed->getHeaderValue(Header::TO) }}
+                    To: {{ $message->parsed->getHeaderValue(Header::TO) }}
                 </p>
 
             </div>
@@ -55,7 +51,7 @@
                 <x-heroicon-o-arrow-right-circle class="size-6" />
             </button>
 
-            <button x-on:click="Helpers.print(@js($parsed->getHtmlContent() ?? $parsed->getTextContent()))" class="transition-colors cursor-default hover:text-neutral-500">
+            <button x-on:click="Helpers.print(@js($message->parsed->getHtmlContent() ?? $message->parsed->getTextContent()))" class="transition-colors cursor-default hover:text-neutral-500">
                 <x-heroicon-o-printer class="size-6" />
             </button>
 

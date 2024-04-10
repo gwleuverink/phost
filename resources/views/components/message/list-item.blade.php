@@ -5,11 +5,6 @@
     'selected' => false
 ])
 
-@php
-    $parsed = $message->parsed()
-@endphp
-
-
 <div {{ $attributes }}
     @class([
         "flex items-center block w-full px-4 py-5 transition border-b cursor-default",
@@ -42,7 +37,7 @@
                 'text-lg font-medium text-neutral-600 transition-colors',
                 '!text-neutral-700' => $selected,
             ])>
-                {{ $parsed->getHeaderValue(Header::FROM) ?? $parsed->getHeaderValue(Header::SENDER) }}
+                {{ $message->parsed->getHeaderValue(Header::FROM) ?? $message->parsed->getHeaderValue(Header::SENDER) }}
             </h3>
 
             <p @class([
@@ -57,7 +52,7 @@
             'text-base italic text-left text-neutral-400 transition-colors',
             '!text-neutral-500' => $selected,
         ])>
-            {{ $parsed->getHeaderValue(Header::SUBJECT) }}
+            {{ $message->parsed->getHeaderValue(Header::SUBJECT) }}
         </div>
 
     </div>

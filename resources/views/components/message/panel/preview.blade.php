@@ -4,10 +4,6 @@
     'message'
 ])
 
-@php
-    $parsed = $message->parsed();
-@endphp
-
 <x-message.panel>
 
     <iframe wire:key="hmtl-preview-{{ str()->random(6) }}"
@@ -17,7 +13,7 @@
                 () => $el.style.height = $el.contentDocument.body?.scrollHeight +'px'
             )
         }"
-        srcdoc="{{ $parsed->getHtmlContent() ?? $parsed->getTextContent() }}"
+        srcdoc="{{ $message->parsed->getHtmlContent() ?? $message->parsed->getTextContent() }}"
         x-on:resize.window.debounce="resize()"
         x-intersect:enter="resize()"
         x-on:load="resize()"

@@ -1,6 +1,6 @@
 
 <main
-    wire:poll.keep-alive="supervisor({{ $this->inbox->count() }})"
+    wire:poll.keep-alive="supervisor"
     x-on:keydown.meta.r.prevent="
         window.location.href = '/{{ $this->message?->id }}';
     "
