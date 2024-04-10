@@ -27,7 +27,9 @@ class Message extends Model
 
     public function parsed(): ParsedMessage
     {
-        return ParsedMessage::from($this->content, true);
+        return once(
+            fn () => ParsedMessage::from($this->content, true)
+        );
     }
 
     public function markRead(): void

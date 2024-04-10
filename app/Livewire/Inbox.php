@@ -30,10 +30,6 @@ class Inbox extends Component
         $this->selectedMessageId = $id;
 
         $this->message?->markRead();
-
-        // Not pretty, but most reliable way to ensure properly sized iframe
-        // TODO: Hook into render with alpine & dispatch there (or even on the component?)
-        $this->dispatch('reload-message-preview');
     }
 
     public function deleteMessage(int $id)
@@ -50,11 +46,9 @@ class Inbox extends Component
         Message::findOrFail($id)->toggleBookmark();
 
         $this->message?->markRead();
-
-        $this->dispatch('reload-message-preview');
     }
 
-    public function supervisor($previousTotal)
+    public function supervisor()
     {
         // Ensure sever is running (fail silently, could be started via multiple windows)
         rescue(
@@ -64,11 +58,19 @@ class Inbox extends Component
         );
 
         // Skip render when no new messages
-        if ($this->inbox->count() !== $previousTotal) {
-            $this->dispatch('reload-message-preview');
-        } else {
-            $this->skipRender();
-        }
+        // if ($this->previousInboxTotal <= $this->inbox->count()) {
+
+        //     return $this->skipRender();
+        // }
+
+        // $lastMessage = $this->inbox->last();
+        // // $this->dispatch('reload-message-preview');
+        // $this->previousInboxTotal = $this->inbox->count();
+
+        // $this->notify(
+        //     $lastMessage->parsed()->getHeaderValue(Header::FROM),
+        //     $lastMessage->parsed()->getHeaderValue(Header::SUBJECT)
+        // );
     }
 
     #[Computed()]

@@ -10,7 +10,7 @@
 
 <x-message.panel>
 
-    <iframe
+    <iframe wire:key="hmtl-preview-{{ str()->random(6) }}"
         x-title="html-preview"
         x-data="{
             resize: () => $nextTick(
@@ -18,7 +18,6 @@
             )
         }"
         srcdoc="{{ $parsed->getHtmlContent() ?? $parsed->getTextContent() }}"
-        x-on:reload-message-preview.window="$nextTick(() => resize())"
         x-on:resize.window.debounce="resize()"
         x-intersect:enter="resize()"
         x-on:load="resize()"
