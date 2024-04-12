@@ -20,11 +20,16 @@ class Inbox extends Component
 
     public ?int $selectedMessageId = null;
 
-    public function mount($selectedMessageId = null)
+    public function mount($messageId = null)
     {
-        $this->selectedMessageId = $selectedMessageId;
+        if ($messageId) {
+            $this->selectedMessageId = $messageId;
 
-        $this->message?->markRead();
+            $this->message?->markRead();
+        }
+
+        // Start the SMTP server
+        $this->supervisor();
     }
 
     public function selectMessage(int $id)
