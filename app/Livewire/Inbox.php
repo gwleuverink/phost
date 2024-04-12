@@ -2,14 +2,17 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Concerns\SmtpSupervisor;
 use App\Models\Message;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\Computed;
-use Livewire\Attributes\Title;
-use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\Attributes\Url;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Computed;
+use Illuminate\Support\Collection;
+use App\Livewire\Concerns\SmtpSupervisor;
 
+/**
+ * @property ?Message $message
+ */
 #[Title('Phost | Inbox')]
 class Inbox extends Component
 {
@@ -70,7 +73,7 @@ class Inbox extends Component
     {
         return Message::query()
             ->when($this->search, fn ($query) => $query
-                ->where('content', 'like', '%'.trim($this->search).'%')
+                ->where('content', 'like', '%' . trim($this->search) . '%')
             )
             ->orderByDesc('bookmarked')
             ->latest()

@@ -1,0 +1,24 @@
+{
+    "scripts": {
+        "lint": {
+            "Prettier Blade": [
+                "./node_modules/.bin/prettier",
+                "--check",
+                "resources/**/*.blade.php"
+            ],
+            "Larastan": [
+                "./vendor/bin/phpstan",
+                "analyse",
+                "--memory-limit=2G"
+            ]
+        },
+        "fix": {
+            "Prettier Blade": [
+                "./node_modules/.bin/prettier",
+                "--write",
+                "resources/**/*.blade.php"
+            ]
+        }
+    },
+    "processTimeout": 120
+}

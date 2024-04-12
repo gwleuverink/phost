@@ -1,0 +1,81 @@
+name: codestyle
+
+# Commits made in here will not trigger any workflows
+# Checkout Duster's documentation for a workaround
+
+on:
+  pull_request:
+    branches: [development, dev, acceptance, staging, main, master]
+
+jobs:
+  skip-duplicates:
+    continue-on-error: true # Uncomment once integration is finished
+    runs-on: ubuntu-latest
+
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          # All of these options are optional, so you can remove them if you are happy with the defaults
+          cancel_others: "true"
+          concurrent_skipping: "same_content"
+          skip_after_successful_duplicate: "true"
+          paths_ignore: '["**/README.md", "**/docs/**"]'
+
+  duster-fix:
+    needs: skip-duplicates
+    if: needs.skip-duplicates.outputs.should_skip != 'true'
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: "Duster Fix"
+        uses: tighten/duster-action@v2
+        with:
+          args: fix
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        id: auto_commit_action
+        with:
+          commit_message: Dusting
+          commit_user_name: GitHub Action
+          commit_user_email: actions@github.com
+
+      - name: Ignore Duster commit in git blame
+        if: steps.auto_commit_action.outputs.changes_detected == 'true'
+        run: echo ${{ steps.auto_commit_action.outputs.commit_hash }} >> .git-blame-ignore-revs
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Ignore Dusting commit in git blame
+          commit_user_name: GitHub Action
+          commit_user_email: actions@github.com
+
+  duster-lint:
+    needs: skip-duplicates
+    if: needs.skip-duplicates.outputs.should_skip != 'true'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: php-actions/composer@v6
+
+      - name: "Duster Lint"
+        uses: tighten/duster-action@v2
+        with:
+          args: lint

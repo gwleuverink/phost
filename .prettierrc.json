@@ -1,0 +1,23 @@
+{
+    "plugins": [
+        "@shufo/prettier-plugin-blade"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.blade.php"
+            ],
+            "options": {
+                "parser": "blade",
+                "tabWidth": 4
+            }
+        }
+    ],
+
+    "htmlWhitespaceSensitivity": "css",
+    "sortTailwindcssClasses": true,
+    "singleAttributePerLine": true,
+    "bracketSameLine": false,
+    "printWidth": 600,
+    "tabWidth": 4
+ }

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use ZBateson\MailMimeParser\Message as ParsedMessage;
+use ZBateson\MailMimeParser\IMessage as ParsedMessageContract;
 
 class Message extends Model
 {
@@ -32,7 +33,7 @@ class Message extends Model
     public function parsed(): Attribute
     {
         return Attribute::make(
-            get: fn (): ParsedMessage => ParsedMessage::from($this->content, true)
+            get: fn (): ParsedMessageContract => ParsedMessage::from($this->content, true)
         )->shouldCache();
     }
 
