@@ -35,7 +35,6 @@ jobs:
             - uses: shivammathur/setup-php@v2
               with:
                   php-version: "8.2"
-                  extensions: pcntl
 
             - name: Cache Composer dependencies
               uses: actions/cache@v3
