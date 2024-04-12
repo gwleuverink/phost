@@ -2,11 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Events\MessageReceived;
+use App\Livewire\Concerns\SmtpSupervisor;
 use App\Models\Message;
-use App\Services\Smtp\Server;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\Renderless;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -14,6 +15,8 @@ use Livewire\Component;
 #[Title('Phost | Inbox')]
 class Inbox extends Component
 {
+    use SmtpSupervisor;
+
     #[Url]
     public string $search = '';
 
@@ -49,31 +52,15 @@ class Inbox extends Component
         $this->message?->markRead();
     }
 
-    #[Renderless]
-    public function supervisor()
+    #[On('native:'.MessageReceived::class)]
+    public function messageReceived()
     {
+        // TODO: Implement NativePHP events with Echo
+        // https://nativephp.com/docs/1/digging-deeper/broadcasting
+        // https://laravel.com/docs/11.x/broadcasting#client-side-installation
+        // Laravel websockets doesn't support L11. Can we use Reverb instead? https://laravel.com/docs/11.x/reverb
 
-        // Ensure sever is running (fail silently, could be started via multiple windows)
-        // rescue(
-        //     fn () => Server::new(2525)
-        //         ->onMessageReceived(fn ($content) => Message::fromContent($content))
-        //         ->serve()
-        // );
-
-        // Skip render when no new messages
-        // if ($this->previousInboxTotal <= $this->inbox->count()) {
-
-        //     return $this->skipRender();
-        // }
-
-        // $lastMessage = $this->inbox->last();
-        // // $this->dispatch('reload-message-preview');
-        // $this->previousInboxTotal = $this->inbox->count();
-
-        // $this->notify(
-        //     $lastMessage->parsed()->getHeaderValue(Header::FROM),
-        //     $lastMessage->parsed()->getHeaderValue(Header::SUBJECT)
-        // );
+        dd('Received new message');
     }
 
     #[Computed()]
