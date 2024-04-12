@@ -2,11 +2,11 @@
 
 namespace App\Livewire\Concerns;
 
-use App\Events\MessageReceived;
-use App\Models\Message;
-use App\Services\Smtp\Server;
 use Exception;
+use App\Models\Message;
 use Livewire\Attributes\On;
+use App\Services\Smtp\Server;
+use App\Events\MessageReceived;
 use Livewire\Attributes\Renderless;
 
 trait SmtpSupervisor
@@ -42,7 +42,7 @@ trait SmtpSupervisor
      * This needs to be called via a channel so we can pick
      * up on events raised from a separate process.
      */
-    #[On('native:'.MessageReceived::class)]
+    #[On('native:' . MessageReceived::class)]
     public function messageReceived()
     {
         // TODO: Implement NativePHP events with Echo

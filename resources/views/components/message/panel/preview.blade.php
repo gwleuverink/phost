@@ -1,16 +1,15 @@
 @use('ZBateson\MailMimeParser\Header\HeaderConsts', 'Header')
 
-@props([
-    'message'
-])
+@props(['message'])
 
 <x-message.panel>
 
-    <iframe wire:key="hmtl-preview-{{ str()->random(6) }}"
+    <iframe
+        wire:key="hmtl-preview-{{ str()->random(6) }}"
         x-title="html-preview"
         x-data="{
             resize: () => $nextTick(
-                () => setTimeout(() => $el.style.height = $el.contentDocument.body?.scrollHeight + 1 +'px')
+                () => setTimeout(() => $el.style.height = $el.contentDocument.body?.scrollHeight + 1 + 'px')
             )
         }"
         srcdoc="{{ $message->parsed->getHtmlContent() ?? $message->parsed->getTextContent() }}"
@@ -19,9 +18,8 @@
         x-on:load="resize()"
         x-init="resize()"
         x-cloak
-
         frameborder="0"
-        class="w-full !min-h-[calc(100vh + 45px)]"
+        class="!min-h-[calc(100vh + 45px)] w-full"
     ></iframe>
 
 </x-message.panel>

@@ -1,6 +1,4 @@
-@props([
-    'message'
-])
+@props(['message'])
 
 <x-message.panel class="px-6 py-4">
 

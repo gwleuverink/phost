@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Native\Laravel\Contracts\ProvidesPhpIni;
 use Native\Laravel\Facades\Window;
+use Native\Laravel\Contracts\ProvidesPhpIni;
 
 class NativeAppServiceProvider implements ProvidesPhpIni
 {

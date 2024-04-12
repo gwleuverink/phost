@@ -1,31 +1,35 @@
 @use('ZBateson\MailMimeParser\Header\HeaderConsts', 'Header')
 
-@props([
-    'message',
-    'selected' => false
-])
+@props(['message', 'selected' => false])
 
-<div {{ $attributes }}
+<div
+    {{ $attributes }}
     @class([
-        "flex items-center block w-full px-4 py-5 transition border-b cursor-default",
-        "shadow-inner bg-neutral-200" => $selected,
-        "hover:bg-neutral-100" => !$selected,
+        'flex items-center block w-full px-4 py-5 transition border-b cursor-default',
+        'shadow-inner bg-neutral-200' => $selected,
+        'hover:bg-neutral-100' => !$selected,
     ])
 >
 
     <div class="flex items-center">
 
         {{-- ping --}}
-        @unless($message->read_at)
-            <span wire:key="unread-ping" class="relative flex w-3 h-3 mr-3">
-                <span class="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-sky-400"></span>
-                <span class="relative inline-flex w-3 h-3 rounded-full bg-sky-500"></span>
+        @unless ($message->read_at)
+            <span
+                wire:key="unread-ping"
+                class="relative mr-3 flex h-3 w-3"
+            >
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                <span class="relative inline-flex h-3 w-3 rounded-full bg-sky-500"></span>
             </span>
         @endunless
 
         {{-- bookmark --}}
-        @if($message->bookmarked)
-            <x-heroicon-m-bookmark wire:key="bookmark-icon" class="w-3.5 h-3.5 mr-2.5 text-rose-600" />
+        @if ($message->bookmarked)
+            <x-heroicon-m-bookmark
+                wire:key="bookmark-icon"
+                class="mr-2.5 h-3.5 w-3.5 text-rose-600"
+            />
         @endif
 
     </div>
