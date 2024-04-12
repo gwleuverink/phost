@@ -10,7 +10,7 @@
         x-title="html-preview"
         x-data="{
             resize: () => $nextTick(
-                () => $el.style.height = $el.contentDocument.body?.scrollHeight +'px'
+                () => setTimeout(() => $el.style.height = $el.contentDocument.body?.scrollHeight + 1 +'px')
             )
         }"
         srcdoc="{{ $message->parsed->getHtmlContent() ?? $message->parsed->getTextContent() }}"
