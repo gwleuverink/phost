@@ -2,12 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Events\MessageReceived;
 use App\Livewire\Concerns\SmtpSupervisor;
 use App\Models\Message;
 use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -50,17 +48,6 @@ class Inbox extends Component
         Message::findOrFail($id)->toggleBookmark();
 
         $this->message?->markRead();
-    }
-
-    #[On('native:'.MessageReceived::class)]
-    public function messageReceived()
-    {
-        // TODO: Implement NativePHP events with Echo
-        // https://nativephp.com/docs/1/digging-deeper/broadcasting
-        // https://laravel.com/docs/11.x/broadcasting#client-side-installation
-        // Laravel websockets doesn't support L11. Can we use Reverb instead? https://laravel.com/docs/11.x/reverb
-
-        dd('Received new message');
     }
 
     #[Computed()]
