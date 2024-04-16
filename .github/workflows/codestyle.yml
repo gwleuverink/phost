@@ -46,6 +46,10 @@ jobs:
                   cache: "npm"
             - run: npm ci
 
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.2"
+
             - name: Cache Composer dependencies
               uses: actions/cache@v3
               with:
@@ -94,6 +98,10 @@ jobs:
                   node-version: 20
                   cache: "npm"
             - run: npm ci
+
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.2"
 
             - name: Cache Composer dependencies
               uses: actions/cache@v3
