@@ -20,5 +20,10 @@ yarn-error.log
 /.idea
 /.vscode
 
+output.log
+docker_tag
+DOCKER_ENV
+Dockerfile-php-build
+
 _ide_helper.php
 .phpstorm.meta.php
