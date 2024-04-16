@@ -1,0 +1,369 @@
+Running php-build composer
+WARNING! Your password will be stored unencrypted in /home/runner/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+Pulling docker.pkg.github.com/gwleuverink/phost/php-actions_composer_phost:php-8.2-pcntl-build2.1.0
+Error response from daemon: manifest unknown
+Dockerfile:
+FROM php:8.2-cli-alpine
+RUN apk add --update --no-cache bash coreutils git make openssh patch unzip zip
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN chmod +x /usr/local/bin/install-php-extensions && sync && install-php-extensions pcntl
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile-php-build
+#1 transferring dockerfile: 370B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 2B done
+#2 DONE 0.0s
+
+#3 [auth] library/php:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/library/php:8.2-cli-alpine
+#4 DONE 0.4s
+
+#5 importing cache manifest from docker.pkg.github.com/gwleuverink/phost/php-actions_composer_phost:php-8.2-pcntl-build2.1.0
+#5 ERROR: failed to configure registry cache importer: pulling from host docker.pkg.github.com failed with status code [manifests php-8.2-pcntl-build2.1.0]: 401 Unauthorized
+
+#6 [1/4] FROM docker.io/library/php:8.2-cli-alpine@sha256:0732d9969e6c2994684aac53051dd115799ce20a92c4db8f12b7013b7c0caeff
+#6 resolve docker.io/library/php:8.2-cli-alpine@sha256:0732d9969e6c2994684aac53051dd115799ce20a92c4db8f12b7013b7c0caeff done
+#6 ...
+
+#7 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions
+#7 DONE 0.2s
+
+#6 [1/4] FROM docker.io/library/php:8.2-cli-alpine@sha256:0732d9969e6c2994684aac53051dd115799ce20a92c4db8f12b7013b7c0caeff
+#6 sha256:08d0ffd2e20b566cd1d34a2f8d3cca45bc046ab267fae0edfac814a8338fdff9 0B / 2.45kB 0.1s
+#6 sha256:006d830451b3b6129c86e259d539436840feebddb37f6a481da63b0ac3a6319b 2.20kB / 2.20kB done
+#6 sha256:4b99432ace8a7bcff6a457c1ea616c20b241e4012ebc18ff9b4b9a7ca571de2d 2.76MB / 2.76MB 0.1s done
+#6 sha256:0150bd92669e20735014cc4cdd3025dcc133ddf84e3c341b7e4845924574ebd5 1.05MB / 12.11MB 0.1s
+#6 sha256:6839461719bd9ee5b0e8e2d9a6043536870c9b91e6a3d3b32ec54ac85a90b363 0B / 19.44MB 0.1s
+#6 sha256:0732d9969e6c2994684aac53051dd115799ce20a92c4db8f12b7013b7c0caeff 1.65kB / 1.65kB done
+#6 sha256:9dc672684f7ec018374e8fce364bd505e41dba27bbb9b013f2a14d32e75c4f98 9.06kB / 9.06kB done
+#6 sha256:d3a73aae1c86e8e06844a0d6ff516b8d12cc95d745da7005aea6ff3ec71c90ef 1.26kB / 1.26kB 0.0s done
+#6 sha256:9294d9185d898643d89218d8a670313cd2bb59107bf32cb6ac92e7f46839bbc8 269B / 269B 0.0s done
+#6 sha256:036a86a4ae3854aafbc2f0d72aabcbef83490743d20012002547de8270618662 499B / 499B 0.1s done
+#6 sha256:08d0ffd2e20b566cd1d34a2f8d3cca45bc046ab267fae0edfac814a8338fdff9 2.45kB / 2.45kB 0.2s done
+#6 sha256:0150bd92669e20735014cc4cdd3025dcc133ddf84e3c341b7e4845924574ebd5 11.70MB / 12.11MB 0.2s
+#6 sha256:6839461719bd9ee5b0e8e2d9a6043536870c9b91e6a3d3b32ec54ac85a90b363 6.29MB / 19.44MB 0.2s
+#6 extracting sha256:4b99432ace8a7bcff6a457c1ea616c20b241e4012ebc18ff9b4b9a7ca571de2d 0.2s done
+#6 sha256:ceebff25163f713105943e5d24c76c606bfa563e2389eb7e137fd1ac69dd32b0 0B / 19.30kB 0.2s
+#6 sha256:0150bd92669e20735014cc4cdd3025dcc133ddf84e3c341b7e4845924574ebd5 12.11MB / 12.11MB 0.2s done
+#6 sha256:6839461719bd9ee5b0e8e2d9a6043536870c9b91e6a3d3b32ec54ac85a90b363 19.44MB / 19.44MB 0.4s
+#6 sha256:ceebff25163f713105943e5d24c76c606bfa563e2389eb7e137fd1ac69dd32b0 19.30kB / 19.30kB 0.2s done
+#6 sha256:6839461719bd9ee5b0e8e2d9a6043536870c9b91e6a3d3b32ec54ac85a90b363 19.44MB / 19.44MB 0.4s done
+#6 extracting sha256:d3a73aae1c86e8e06844a0d6ff516b8d12cc95d745da7005aea6ff3ec71c90ef done
+#6 extracting sha256:9294d9185d898643d89218d8a670313cd2bb59107bf32cb6ac92e7f46839bbc8 done
+#6 extracting sha256:0150bd92669e20735014cc4cdd3025dcc133ddf84e3c341b7e4845924574ebd5
+#6 extracting sha256:0150bd92669e20735014cc4cdd3025dcc133ddf84e3c341b7e4845924574ebd5 0.1s done
+#6 extracting sha256:036a86a4ae3854aafbc2f0d72aabcbef83490743d20012002547de8270618662
+#6 extracting sha256:036a86a4ae3854aafbc2f0d72aabcbef83490743d20012002547de8270618662 done
+#6 extracting sha256:6839461719bd9ee5b0e8e2d9a6043536870c9b91e6a3d3b32ec54ac85a90b363
+#6 extracting sha256:6839461719bd9ee5b0e8e2d9a6043536870c9b91e6a3d3b32ec54ac85a90b363 0.7s done
+#6 extracting sha256:08d0ffd2e20b566cd1d34a2f8d3cca45bc046ab267fae0edfac814a8338fdff9
+#6 extracting sha256:08d0ffd2e20b566cd1d34a2f8d3cca45bc046ab267fae0edfac814a8338fdff9 done
+#6 extracting sha256:ceebff25163f713105943e5d24c76c606bfa563e2389eb7e137fd1ac69dd32b0 done
+#6 DONE 3.7s
+
+#8 [2/4] RUN apk add --update --no-cache bash coreutils git make openssh patch unzip zip
+#8 0.202 fetch https://dl-cdn.alpinelinux.org/alpine/v3.19/main/x86_64/APKINDEX.tar.gz
+#8 0.300 fetch https://dl-cdn.alpinelinux.org/alpine/v3.19/community/x86_64/APKINDEX.tar.gz
+#8 0.544 (1/23) Installing bash (5.2.21-r0)
+#8 0.565 Executing bash-5.2.21-r0.post-install
+#8 0.568 (2/23) Installing coreutils-env (9.4-r2)
+#8 0.575 (3/23) Installing coreutils-fmt (9.4-r2)
+#8 0.581 (4/23) Installing coreutils-sha512sum (9.4-r2)
+#8 0.588 (5/23) Installing libattr (2.5.1-r5)
+#8 0.594 (6/23) Installing skalibs (2.14.0.1-r0)
+#8 0.602 (7/23) Installing utmps-libs (0.1.2.2-r0)
+#8 0.608 (8/23) Installing coreutils (9.4-r2)
+#8 0.631 (9/23) Installing libexpat (2.6.2-r0)
+#8 0.638 (10/23) Installing pcre2 (10.42-r2)
+#8 0.650 (11/23) Installing git (2.43.0-r0)
+#8 0.713 (12/23) Installing make (4.4.1-r2)
+#8 0.721 (13/23) Installing openssh-keygen (9.6_p1-r0)
+#8 0.731 (14/23) Installing libedit (20230828.3.1-r3)
+#8 0.739 (15/23) Installing openssh-client-common (9.6_p1-r0)
+#8 0.759 (16/23) Installing openssh-client-default (9.6_p1-r0)
+#8 0.772 (17/23) Installing openssh-sftp-server (9.6_p1-r0)
+#8 0.779 (18/23) Installing openssh-server-common (9.6_p1-r0)
+#8 0.785 (19/23) Installing openssh-server (9.6_p1-r0)
+#8 0.799 (20/23) Installing openssh (9.6_p1-r0)
+#8 0.807 (21/23) Installing patch (2.7.6-r10)
+#8 0.815 (22/23) Installing unzip (6.0-r14)
+#8 0.825 (23/23) Installing zip (3.0-r12)
+#8 0.836 Executing busybox-1.36.1-r15.trigger
+#8 0.843 OK: 35 MiB in 61 packages
+#8 DONE 1.0s
+
+#9 [3/4] ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+#9 DONE 0.0s
+
+#10 [4/4] RUN chmod +x /usr/local/bin/install-php-extensions && sync && install-php-extensions pcntl
+#10 0.316 install-php-extensions v.2.2.9
+#10 0.316 #StandWithUkraine
+#10 2.749 Updating channel "pecl.php.net"
+#10 2.834 Channel "pecl.php.net" is up to date
+#10 2.841 fetch https://dl-cdn.alpinelinux.org/alpine/v3.19/main/x86_64/APKINDEX.tar.gz
+#10 2.950 fetch https://dl-cdn.alpinelinux.org/alpine/v3.19/community/x86_64/APKINDEX.tar.gz
+#10 3.241 v3.19.1-403-ge4b3b937776 [https://dl-cdn.alpinelinux.org/alpine/v3.19/main]
+#10 3.241 v3.19.1-409-g31d738535a9 [https://dl-cdn.alpinelinux.org/alpine/v3.19/community]
+#10 3.241 OK: 22992 distinct packages available
+#10 5.321 ### INSTALLING REQUIRED PACKAGES ###
+#10 5.321 # Packages to be kept after installation: 
+#10 5.321 # Packages to be used only for installation: m4 libbz2 perl autoconf libmd dpkg pkgconf dpkg-dev libmagic file libstdc++ libstdc++-dev jansson zstd-libs binutils libgomp libatomic gmp isl26 mpfr4 mpc1 gcc musl-dev libc-dev g++ perl-error perl-git git-perl re2c
+#10 5.625 (1/29) Installing m4 (1.4.19-r3)
+#10 5.708 (2/29) Installing libbz2 (1.0.8-r6)
+#10 5.716 (3/29) Installing perl (5.38.2-r0)
+#10 6.123 (4/29) Installing autoconf (2.71-r2)
+#10 6.146 (5/29) Installing jansson (2.14-r4)
+#10 6.153 (6/29) Installing libstdc++ (13.2.1_git20231014-r0)
+#10 6.175 (7/29) Installing zstd-libs (1.5.5-r8)
+#10 6.190 (8/29) Installing binutils (2.41-r0)
+#10 6.258 (9/29) Installing libmd (1.1.0-r0)
+#10 6.265 (10/29) Installing dpkg (1.22.1-r0)
+#10 6.283 (11/29) Installing pkgconf (2.1.0-r0)
+#10 6.290 (12/29) Installing dpkg-dev (1.22.1-r0)
+#10 6.321 (13/29) Installing libmagic (5.45-r1)
+#10 6.348 (14/29) Installing file (5.45-r1)
+#10 6.355 (15/29) Installing libstdc++-dev (13.2.1_git20231014-r0)
+#10 6.513 (16/29) Installing libgomp (13.2.1_git20231014-r0)
+#10 6.521 (17/29) Installing libatomic (13.2.1_git20231014-r0)
+#10 6.528 (18/29) Installing gmp (6.3.0-r0)
+#10 6.539 (19/29) Installing isl26 (0.26-r1)
+#10 6.559 (20/29) Installing mpfr4 (4.2.1-r0)
+#10 6.572 (21/29) Installing mpc1 (1.3.1-r1)
+#10 6.579 (22/29) Installing gcc (13.2.1_git20231014-r0)
+#10 7.336 (23/29) Installing musl-dev (1.2.4_git20230717-r4)
+#10 7.405 (24/29) Installing libc-dev (0.7.2-r5)
+#10 7.411 (25/29) Installing g++ (13.2.1_git20231014-r0)
+#10 7.631 (26/29) Installing perl-error (0.17029-r2)
+#10 7.638 (27/29) Installing perl-git (2.43.0-r0)
+#10 7.646 (28/29) Installing git-perl (2.43.0-r0)
+#10 7.652 (29/29) Installing re2c (3.1-r0)
+#10 7.671 Executing busybox-1.36.1-r15.trigger
+#10 7.679 OK: 298 MiB in 90 packages
+#10 8.059 ### INSTALLING BUNDLED MODULE pcntl ###
+#10 8.096 fetch https://dl-cdn.alpinelinux.org/alpine/v3.19/main/x86_64/APKINDEX.tar.gz
+#10 8.194 fetch https://dl-cdn.alpinelinux.org/alpine/v3.19/community/x86_64/APKINDEX.tar.gz
+#10 8.477 (1/1) Installing .phpize-deps (20240416.074426)
+#10 8.480 OK: 298 MiB in 91 packages
+#10 8.562 Configuring for:
+#10 8.562 PHP Api Version:         20220829
+#10 8.562 Zend Module Api No:      20220829
+#10 8.562 Zend Extension Api No:   420220829
+#10 9.469 checking for grep that handles long lines and -e... /bin/grep
+#10 9.535 checking for egrep... /bin/grep -E
+#10 9.536 checking for a sed that does not truncate output... /bin/sed
+#10 9.561 checking for pkg-config... /usr/bin/pkg-config
+#10 9.561 checking pkg-config is at least version 0.9.0... yes
+#10 9.562 checking for cc... cc
+#10 9.588 checking whether the C compiler works... yes
+#10 9.621 checking for C compiler default output file name... a.out
+#10 9.623 checking for suffix of executables... 
+#10 9.656 checking whether we are cross compiling... no
+#10 9.691 checking for suffix of object files... o
+#10 9.716 checking whether the compiler supports GNU C... yes
+#10 9.739 checking whether cc accepts -g... yes
+#10 9.764 checking for cc option to enable C11 features... none needed
+#10 9.826 checking how to run the C preprocessor... cc -E
+#10 9.883 checking for icc... no
+#10 9.895 checking for suncc... no
+#10 9.908 checking for system library directory... lib
+#10 9.908 checking if compiler supports -Wl,-rpath,... yes
+#10 9.946 checking build system type... x86_64-pc-linux-musl
+#10 9.949 checking host system type... x86_64-pc-linux-musl
+#10 9.949 checking target system type... x86_64-pc-linux-musl
+#10 9.987 checking for PHP prefix... /usr/local
+#10 9.987 checking for PHP includes... -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib
+#10 9.987 checking for PHP extension directory... /usr/local/lib/php/extensions/no-debug-non-zts-20220829
+#10 9.987 checking for PHP installed headers prefix... /usr/local/include/php
+#10 9.987 checking if debug is enabled... no
+#10 10.00 checking if zts is enabled... no
+#10 10.02 checking for gawk... no
+#10 10.02 checking for nawk... no
+#10 10.02 checking for awk... awk
+#10 10.02 checking if awk is broken... no
+#10 10.02 checking whether to enable pcntl support... yes, shared
+#10 10.02 checking for fork... yes
+#10 10.06 checking for waitpid... yes
+#10 10.10 checking for sigaction... yes
+#10 10.13 checking for getpriority... yes
+#10 10.17 checking for setpriority... yes
+#10 10.20 checking for wait3... yes
+#10 10.24 checking for wait4... yes
+#10 10.28 checking for sigwaitinfo... yes
+#10 10.31 checking for sigtimedwait... yes
+#10 10.35 checking for unshare... yes
+#10 10.38 checking for rfork... no
+#10 10.42 checking for forkx... no
+#10 10.46 checking for siginfo_t... yes
+#10 10.50 checking for a sed that does not truncate output... /bin/sed
+#10 10.50 checking for ld used by cc... /usr/x86_64-alpine-linux-musl/bin/ld
+#10 10.51 checking if the linker (/usr/x86_64-alpine-linux-musl/bin/ld) is GNU ld... yes
+#10 10.51 checking for /usr/x86_64-alpine-linux-musl/bin/ld option to reload object files... -r
+#10 10.51 checking for BSD-compatible nm... /usr/bin/nm -B
+#10 10.51 checking whether ln -s works... yes
+#10 10.51 checking how to recognize dependent libraries... pass_all
+#10 10.53 checking for stdio.h... yes
+#10 10.55 checking for stdlib.h... yes
+#10 10.56 checking for string.h... yes
+#10 10.59 checking for inttypes.h... yes
+#10 10.61 checking for stdint.h... yes
+#10 10.63 checking for strings.h... yes
+#10 10.65 checking for sys/stat.h... yes
+#10 10.67 checking for sys/types.h... yes
+#10 10.69 checking for unistd.h... yes
+#10 10.72 checking for dlfcn.h... yes
+#10 10.74 checking the maximum length of command line arguments... 98304
+#10 10.74 checking command to parse /usr/bin/nm -B output from cc object... ok
+#10 10.81 checking for objdir... .libs
+#10 10.81 checking for ar... ar
+#10 10.81 checking for ranlib... ranlib
+#10 10.81 checking for strip... strip
+#10 10.86 checking if cc supports -fno-rtti -fno-exceptions... no
+#10 10.88 checking for cc option to produce PIC... -fPIC
+#10 10.88 checking if cc PIC flag -fPIC works... yes
+#10 10.91 checking if cc static flag -static works... yes
+#10 10.96 checking if cc supports -c -o file.o... yes
+#10 11.00 checking whether the cc linker (/usr/x86_64-alpine-linux-musl/bin/ld -m elf_x86_64) supports shared libraries... yes
+#10 11.02 checking whether -lc should be explicitly linked in... no
+#10 11.05 checking dynamic linker characteristics... GNU/Linux ld.so
+#10 11.06 checking how to hardcode library paths into programs... immediate
+#10 11.07 checking whether stripping libraries is possible... yes
+#10 11.07 checking if libtool supports shared libraries... yes
+#10 11.07 checking whether to build shared libraries... yes
+#10 11.07 checking whether to build static libraries... no
+#10 11.21 
+#10 11.21 creating libtool
+#10 11.26 appending configuration tag "CXX" to libtool
+#10 11.32 configure: patching config.h.in
+#10 11.33 configure: creating ./config.status
+#10 11.38 config.status: creating config.h
+#10 11.42 /bin/sh /usr/src/php/ext/pcntl/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pcntl -I/usr/src/php/ext/pcntl/include -I/usr/src/php/ext/pcntl/main -I/usr/src/php/ext/pcntl -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE   -DHAVE_STRUCT_SIGINFO_T -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pcntl/pcntl.c -o pcntl.lo  -MMD -MF pcntl.dep -MT pcntl.lo
+#10 11.42 /bin/sh /usr/src/php/ext/pcntl/libtool --tag=CC --mode=compile cc -I. -I/usr/src/php/ext/pcntl -I/usr/src/php/ext/pcntl/include -I/usr/src/php/ext/pcntl/main -I/usr/src/php/ext/pcntl -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE   -DHAVE_STRUCT_SIGINFO_T -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pcntl/php_signal.c -o php_signal.lo  -MMD -MF php_signal.dep -MT php_signal.lo
+#10 11.49 mkdir .libs
+#10 11.50 mkdir .libs
+#10 11.50 mkdir: cannot create directory ‘.libs’: File exists
+#10 11.50  cc -I. -I/usr/src/php/ext/pcntl -I/usr/src/php/ext/pcntl/include -I/usr/src/php/ext/pcntl/main -I/usr/src/php/ext/pcntl -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DHAVE_STRUCT_SIGINFO_T -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pcntl/pcntl.c -MMD -MF pcntl.dep -MT pcntl.lo  -fPIC -DPIC -o .libs/pcntl.o
+#10 11.50  cc -I. -I/usr/src/php/ext/pcntl -I/usr/src/php/ext/pcntl/include -I/usr/src/php/ext/pcntl/main -I/usr/src/php/ext/pcntl -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -DHAVE_STRUCT_SIGINFO_T -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -DZEND_COMPILE_DL_EXT=1 -c /usr/src/php/ext/pcntl/php_signal.c -MMD -MF php_signal.dep -MT php_signal.lo  -fPIC -DPIC -o .libs/php_signal.o
+#10 12.24 /bin/sh /usr/src/php/ext/pcntl/libtool --tag=CC --mode=link cc -shared -I/usr/src/php/ext/pcntl/include -I/usr/src/php/ext/pcntl/main -I/usr/src/php/ext/pcntl -I/usr/local/include/php -I/usr/local/include/php/main -I/usr/local/include/php/TSRM -I/usr/local/include/php/Zend -I/usr/local/include/php/ext -I/usr/local/include/php/ext/date/lib  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -DHAVE_CONFIG_H  -fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE  -Wl,-O1 -pie  -o pcntl.la -export-dynamic -avoid-version -prefer-pic -module -rpath /usr/src/php/ext/pcntl/modules  pcntl.lo php_signal.lo 
+#10 12.29 cc -shared  .libs/pcntl.o .libs/php_signal.o   -Wl,-O1 -Wl,-soname -Wl,pcntl.so -o .libs/pcntl.so
+#10 12.31 creating pcntl.la
+#10 12.31 (cd .libs && rm -f pcntl.la && ln -s ../pcntl.la pcntl.la)
+#10 12.32 /bin/sh /usr/src/php/ext/pcntl/libtool --tag=CC --mode=install cp ./pcntl.la /usr/src/php/ext/pcntl/modules
+#10 12.33 cp ./.libs/pcntl.so /usr/src/php/ext/pcntl/modules/pcntl.so
+#10 12.33 cp ./.libs/pcntl.lai /usr/src/php/ext/pcntl/modules/pcntl.la
+#10 12.35 PATH="$PATH:/sbin" ldconfig -n /usr/src/php/ext/pcntl/modules
+#10 12.40 ----------------------------------------------------------------------
+#10 12.40 Libraries have been installed in:
+#10 12.40    /usr/src/php/ext/pcntl/modules
+#10 12.40 
+#10 12.40 If you ever happen to want to link against installed libraries
+#10 12.40 in a given directory, LIBDIR, you must either use libtool, and
+#10 12.40 specify the full pathname of the library, or use the `-LLIBDIR'
+#10 12.40 flag during linking and do at least one of the following:
+#10 12.40    - add LIBDIR to the `LD_LIBRARY_PATH' environment variable
+#10 12.40      during execution
+#10 12.40    - add LIBDIR to the `LD_RUN_PATH' environment variable
+#10 12.40      during linking
+#10 12.40    - use the `-Wl,--rpath -Wl,LIBDIR' linker flag
+#10 12.40 
+#10 12.40 See any operating system documentation about shared libraries for
+#10 12.40 more information, such as the ld(1) and ld.so(8) manual pages.
+#10 12.40 ----------------------------------------------------------------------
+#10 12.40 
+#10 12.40 Build complete.
+#10 12.40 Don't forget to run 'make test'.
+#10 12.41 
+#10 12.42 + strip --strip-all modules/pcntl.so
+#10 12.44 Installing shared extensions:     /usr/local/lib/php/extensions/no-debug-non-zts-20220829/
+#10 12.51 find . -name \*.gcno -o -name \*.gcda | xargs rm -f
+#10 12.51 find . -name \*.lo -o -name \*.o -o -name \*.dep | xargs rm -f
+#10 12.51 find . -name \*.la -o -name \*.a | xargs rm -f
+#10 12.52 find . -name \*.so | xargs rm -f
+#10 12.52 find . -name .libs -a -type d|xargs rm -rf
+#10 12.52 rm -f libphp.la      modules/* libs/*
+#10 12.52 rm -f ext/opcache/jit/zend_jit_x86.c
+#10 12.52 rm -f ext/opcache/jit/zend_jit_arm64.c
+#10 12.53 rm -f ext/opcache/minilua
+#10 12.79 (1/1) Purging .phpize-deps (20240416.074426)
+#10 12.79 OK: 298 MiB in 90 packages
+#10 12.86 ### REMOVING UNNEEDED PACKAGES ###
+#10 13.13 (1/29) Purging autoconf (2.71-r2)
+#10 13.13 (2/29) Purging m4 (1.4.19-r3)
+#10 13.13 (3/29) Purging dpkg (1.22.1-r0)
+#10 13.13 (4/29) Purging dpkg-dev (1.22.1-r0)
+#10 13.14 (5/29) Purging file (5.45-r1)
+#10 13.14 (6/29) Purging g++ (13.2.1_git20231014-r0)
+#10 13.14 (7/29) Purging libstdc++-dev (13.2.1_git20231014-r0)
+#10 13.17 (8/29) Purging gcc (13.2.1_git20231014-r0)
+#10 13.21 (9/29) Purging binutils (2.41-r0)
+#10 13.21 (10/29) Purging libatomic (13.2.1_git20231014-r0)
+#10 13.21 (11/29) Purging libgomp (13.2.1_git20231014-r0)
+#10 13.21 (12/29) Purging libc-dev (0.7.2-r5)
+#10 13.21 (13/29) Purging musl-dev (1.2.4_git20230717-r4)
+#10 13.22 (14/29) Purging git-perl (2.43.0-r0)
+#10 13.22 (15/29) Purging perl-git (2.43.0-r0)
+#10 13.22 (16/29) Purging perl-error (0.17029-r2)
+#10 13.22 (17/29) Purging perl (5.38.2-r0)
+#10 13.26 (18/29) Purging isl26 (0.26-r1)
+#10 13.26 (19/29) Purging jansson (2.14-r4)
+#10 13.26 (20/29) Purging libbz2 (1.0.8-r6)
+#10 13.26 (21/29) Purging libmagic (5.45-r1)
+#10 13.26 (22/29) Purging libmd (1.1.0-r0)
+#10 13.26 (23/29) Purging mpc1 (1.3.1-r1)
+#10 13.26 (24/29) Purging mpfr4 (4.2.1-r0)
+#10 13.26 (25/29) Purging pkgconf (2.1.0-r0)
+#10 13.26 (26/29) Purging re2c (3.1-r0)
+#10 13.26 (27/29) Purging zstd-libs (1.5.5-r8)
+#10 13.27 (28/29) Purging gmp (6.3.0-r0)
+#10 13.27 (29/29) Purging libstdc++ (13.2.1_git20231014-r0)
+#10 13.27 Executing busybox-1.36.1-r15.trigger
+#10 13.27 OK: 35 MiB in 61 packages
+#10 DONE 14.0s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 0.9s done
+#11 writing image sha256:7523a5323eba8dc59ffe2eff68618ff3ebfcdba1e89c58979c7687192430b3a9 done
+#11 naming to docker.pkg.github.com/gwleuverink/phost/php-actions_composer_phost:php-8.2-pcntl-build2.1.0 done
+#11 DONE 0.9s
+------
+ > importing cache manifest from docker.pkg.github.com/gwleuverink/phost/php-actions_composer_phost:php-8.2-pcntl-build2.1.0:
+------
+The push refers to repository [docker.pkg.github.com/gwleuverink/phost/php-actions_composer_phost]
+0144f103091c: Preparing
+f6b69bf6b47f: Preparing
+492d38bcf17c: Preparing
+1a77ee307309: Preparing
+2949938ad6b1: Preparing
+e943f7139772: Preparing
+d52aed3190b9: Preparing
+6561b37b7f9f: Preparing
+9e2e2872418e: Preparing
+c307e1ff6585: Preparing
+ac9dba9d21f4: Preparing
+d4fc045c9e3a: Preparing
+9e2e2872418e: Waiting
+c307e1ff6585: Waiting
+e943f7139772: Waiting
+d52aed3190b9: Waiting
+6561b37b7f9f: Waiting
+ac9dba9d21f4: Waiting
+d4fc045c9e3a: Waiting
+denied: installation not allowed to Create organization package
+WARNING: Failed to push Docker image to "docker.pkg.github.com/gwleuverink/phost/php-actions_composer_phost:php-8.2-pcntl-build2.1.0", this is probably due to missing permissions on GitHub.
+Will continue as this is just an optimization to improve speed of next build.
+Docker tag: docker.pkg.github.com/gwleuverink/phost/php-actions_composer_phost:php-8.2-pcntl-build2.1.0
+No private keys supplied
+Command: composer install --no-progress --no-interaction
+Skipping env variable PWD
+Skipping env variable HOME
+Skipping env variable SHLVL
+Skipping env variable PATH
