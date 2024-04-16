@@ -46,10 +46,20 @@ jobs:
                   cache: "npm"
             - run: npm ci
 
-            - name: "Duster Fix"
-              uses: tighten/duster-action@v2
+            - name: Cache Composer dependencies
+              uses: actions/cache@v3
               with:
-                  args: fix
+                  path: /tmp/composer-cache
+                  key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+            - uses: php-actions/composer@v6
+              with:
+                  php_version: "8.2"
+                  php_extensions: pcntl
+                  version: 2.x
+
+            - name: Run fixers
+              run: composer fix
 
             - uses: stefanzweifel/git-auto-commit-action@v4
               id: auto_commit_action
@@ -85,9 +95,17 @@ jobs:
                   cache: "npm"
             - run: npm ci
 
-            - uses: php-actions/composer@v6
-
-            - name: "Duster Lint"
-              uses: tighten/duster-action@v2
+            - name: Cache Composer dependencies
+              uses: actions/cache@v3
               with:
-                  args: lint
+                  path: /tmp/composer-cache
+                  key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+            - uses: php-actions/composer@v6
+              with:
+                  php_version: "8.2"
+                  php_extensions: pcntl
+                  version: 2.x
+
+            - name: Run linters & static analysis
+              run: composer lint
