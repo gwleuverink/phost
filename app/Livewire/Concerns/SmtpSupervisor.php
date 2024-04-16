@@ -8,10 +8,13 @@ use Livewire\Attributes\On;
 use App\Services\Smtp\Server;
 use App\Events\MessageReceived;
 use Livewire\Attributes\Renderless;
+use Native\Laravel\Facades\Notification;
+use ZBateson\MailMimeParser\Header\HeaderConsts;
 
 trait SmtpSupervisor
 {
     const PORT = 2525;
+    const NOTIFICATION_TITLE = "You've got Phost!";
 
     /**
      * Called with wire:poll to keep the server alive.
@@ -26,9 +29,13 @@ trait SmtpSupervisor
                 Server::new(self::PORT)
                     ->onMessageReceived(function ($content) {
 
-                        MessageReceived::dispatch(
-                            Message::fromContent($content)
-                        );
+                        $message = Message::fromContent($content);
+
+                        Notification::title(self::NOTIFICATION_TITLE)
+                            ->message($message->parsed->getHeaderValue(HeaderConsts::SUBJECT))
+                            ->show();
+
+                        MessageReceived::dispatch($message);
 
                     })->serve();
             },
