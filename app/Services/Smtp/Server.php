@@ -7,7 +7,6 @@ use React\Socket\ServerInterface;
 use App\Services\Smtp\Enums\Reply;
 use React\EventLoop\LoopInterface;
 use App\Services\Smtp\Enums\Command;
-use ZBateson\MailMimeParser\Message;
 use React\EventLoop\StreamSelectLoop;
 use React\Socket\ConnectionInterface;
 

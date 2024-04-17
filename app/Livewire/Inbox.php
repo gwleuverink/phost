@@ -9,13 +9,16 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Collection;
 use App\Livewire\Concerns\SmtpSupervisor;
+use App\Livewire\Concerns\MessageControls;
 
 /**
  * @property ?Message $message
+ * @property Collection $inbox
  */
 #[Title('Phost | Inbox')]
 class Inbox extends Component
 {
+    use MessageControls;
     use SmtpSupervisor;
 
     #[Url]
@@ -26,34 +29,16 @@ class Inbox extends Component
     public function mount($messageId = null)
     {
         if ($messageId) {
-            $this->selectedMessageId = $messageId;
-
-            $this->message?->markRead();
+            $this->selectMessage($messageId);
         }
 
         // Start the SMTP server
-        $this->supervisor();
+        $this->supervisor(); // TODO: Move to scheduler
     }
 
     public function selectMessage(int $id)
     {
         $this->selectedMessageId = $id;
-
-        $this->message?->markRead();
-    }
-
-    public function deleteMessage(int $id)
-    {
-        Message::findOrFail($id)->delete();
-
-        if ($id === $this->selectedMessageId) {
-            $this->selectedMessageId = null;
-        }
-    }
-
-    public function toggleBookmark(int $id)
-    {
-        Message::findOrFail($id)->toggleBookmark();
 
         $this->message?->markRead();
     }

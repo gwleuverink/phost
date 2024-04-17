@@ -56,11 +56,17 @@
 
         <div class="flex space-x-4 text-neutral-400">
 
-            <button class="cursor-default transition-colors hover:text-neutral-500">
+            <button
+                wire:click="selectPrevious"
+                class="cursor-default transition-colors hover:text-neutral-500"
+            >
                 <x-heroicon-o-arrow-left-circle class="size-6" />
             </button>
 
-            <button class="cursor-default transition-colors hover:text-neutral-500">
+            <button
+                wire:click="selectNext"
+                class="cursor-default transition-colors hover:text-neutral-500"
+            >
                 <x-heroicon-o-arrow-right-circle class="size-6" />
             </button>
 
