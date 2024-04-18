@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Concerns;
 
-use Exception;
+use Throwable;
 use App\Models\Message;
 use Livewire\Attributes\On;
 use App\Services\Smtp\Server;
@@ -39,7 +39,18 @@ trait SmtpSupervisor
 
                     })->serve();
             },
-            report: fn (Exception $e) => ! str($e->getMessage())->contains('EADDRINUSE')
+            // Silently log all errors to the browser console
+            function (Throwable $e) {
+                if (str($e->getMessage())->contains('EADDRINUSE')) {
+                    return;
+                }
+
+                $this->js(<<< JS
+                    console.error('SUPERVISOR: {$e->getMessage()}');
+                JS);
+            },
+            // Log all errors except when port is in use
+            report: fn (Throwable $e) => ! str($e->getMessage())->contains('EADDRINUSE')
         );
     }
 
