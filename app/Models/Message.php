@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use ZBateson\MailMimeParser\Message as ParsedMessage;
 use ZBateson\MailMimeParser\IMessage as ParsedMessageContract;
 
+/**
+ * @property ParsedMessageContract $parsed
+ */
 class Message extends Model
 {
     protected $fillable = [
