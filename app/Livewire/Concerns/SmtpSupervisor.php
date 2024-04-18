@@ -13,8 +13,8 @@ use ZBateson\MailMimeParser\Header\HeaderConsts;
 
 trait SmtpSupervisor
 {
-    const PORT = 2525;
-    const NOTIFICATION_TITLE = "You've got Phost!";
+    protected $PORT = 2525;
+    protected $NOTIFICATION_TITLE = "You've got Phost!";
 
     /**
      * Called with wire:poll to keep the server alive.
@@ -26,12 +26,12 @@ trait SmtpSupervisor
     {
         rescue(
             function () {
-                Server::new(self::PORT)
+                Server::new($this->PORT)
                     ->onMessageReceived(function ($content) {
 
                         $message = Message::fromContent($content);
 
-                        Notification::title(self::NOTIFICATION_TITLE)
+                        Notification::title($this->NOTIFICATION_TITLE)
                             ->message($message->parsed->getHeaderValue(HeaderConsts::SUBJECT))
                             ->show();
 
