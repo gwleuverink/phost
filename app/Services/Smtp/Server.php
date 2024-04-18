@@ -2,6 +2,7 @@
 
 namespace App\Services\Smtp;
 
+use Mockery;
 use React\Socket\SocketServer;
 use React\Socket\ServerInterface;
 use App\Services\Smtp\Enums\Reply;
@@ -35,7 +36,17 @@ class Server
 
     public static function new(int $port = 2525): self
     {
-        return new self($port);
+        return resolve(self::class, ['port' => $port]);
+    }
+
+    public static function fake()
+    {
+        $mock = Mockery::mock(self::class, fn ($mock) => $mock
+            ->makePartial()
+            ->shouldReceive('serve')
+        );
+
+        app()->bind(self::class, fn () => $mock);
     }
 
     public function serve(): void
