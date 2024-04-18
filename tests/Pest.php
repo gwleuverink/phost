@@ -16,7 +16,7 @@ use App\Services\Smtp\Server;
 uses(
     Tests\TestCase::class,
     // Illuminate\Foundation\Testing\RefreshDatabase::class,
-)->beforeAll(function () {
+)->beforeEach(function () {
     Server::fake();
 })->in('Feature');
 
