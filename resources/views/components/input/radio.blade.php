@@ -1,8 +1,4 @@
-@props([
-    'value',
-    'label' => false,
-    'description' => false,
-])
+@props(['value', 'label' => false, 'description' => false])
 
 @php
     $model = $attributes->wire('model')->value;
@@ -13,15 +9,15 @@
     class="relative flex items-center"
     {{ $attributes->whereStartsWith(['wire:key']) }}
 >
-    <div class="flex items-center h-6">
+    <div class="flex h-6 items-center">
         <input
             {{ $attributes->whereStartsWith(['wire', 'x']) }}
             value="{{ $value }}"
             :id="$id('input')"
             type="radio"
-
+            
             @class([
-                'w-4 h-4 text-indigo-600 rounded read-only:ring-opacity-50',
+                'w-4 h-4 text-indigo-600 rounded-full read-only:ring-opacity-50',
                 'border-gray-300 ring-gray-300 focus:ring-indigo-600' => $errors->missing($model),
                 'border-red-400 ring-red-400 focus:ring-red-500' => $errors->has($model),
             ])
@@ -33,7 +29,7 @@
         >
     </div>
 
-    <div class="ml-2 text-sm leading-6 select-none">
+    <div class="ml-2 select-none text-sm leading-6">
         @if ($label)
             <label
                 :for="$id('input')"

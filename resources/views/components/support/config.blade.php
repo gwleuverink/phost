@@ -2,6 +2,7 @@
 
 @props([
     'framework' => null,
+    'port' => 2525,
 ])
 
 <div class="space-y-2 text-sm">
@@ -13,7 +14,7 @@
             <x-support.code>
                 MAIL_MAILER=smtp
                 MAIL_HOST=127.0.0.1
-                MAIL_PORT=2525
+                MAIL_PORT={{ $port }}
                 MAIL_PASSWORD=null
                 MAIL_ENCRYPTION=null
             </x-support.code>
@@ -24,7 +25,7 @@
             <span>Add to your .env file:</span>
 
             <x-support.code>
-                MAILER_URL=smtp://127.0.0.1:2525?encryption=null&auth_mode=login&password=
+                MAILER_URL=smtp://127.0.0.1:{{ $port }}?encryption=null&auth_mode=login&password=
             </x-support.code>
         @break
 
@@ -35,7 +36,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;$phpmailer->isSMTP();
                 &nbsp;&nbsp;&nbsp;&nbsp;$phpmailer->Host = '127.0.0.1';
                 &nbsp;&nbsp;&nbsp;&nbsp;$phpmailer->SMTPAuth = true;
-                &nbsp;&nbsp;&nbsp;&nbsp;$phpmailer->Port = 2525;
+                &nbsp;&nbsp;&nbsp;&nbsp;$phpmailer->Port = {{ $port }};
                 &nbsp;&nbsp;&nbsp;&nbsp;$phpmailer->Password = '';
                 }
 
@@ -56,7 +57,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'class' => 'Swift_SmtpTransport',
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'host' => '127.0.0.1',
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'password' => '',
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'port' => '2525',
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'port' => '{{ $port }}',
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'encryption' => 'tls',
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],
                 &nbsp;&nbsp;&nbsp;&nbsp;],
@@ -76,7 +77,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;:password => '',
                 &nbsp;&nbsp;&nbsp;&nbsp;:address => '127.0.0.1',
                 &nbsp;&nbsp;&nbsp;&nbsp;:domain => '127.0.0.1',
-                &nbsp;&nbsp;&nbsp;&nbsp;:port => '2525',
+                &nbsp;&nbsp;&nbsp;&nbsp;:port => '{{ $port }}',
                 &nbsp;&nbsp;&nbsp;&nbsp;:authentication => :plain
                 }
             </x-support.code>

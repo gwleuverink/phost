@@ -13,7 +13,8 @@ use ZBateson\MailMimeParser\Header\HeaderConsts;
 
 trait SmtpSupervisor
 {
-    const PORT = 2525;
+    use Config;
+
     const NOTIFICATION_TITLE = "You've got Phost!";
 
     /**
@@ -26,7 +27,7 @@ trait SmtpSupervisor
     {
         rescue(
             function () {
-                Server::new(self::PORT)
+                Server::new($this->config->port)
                     ->onMessageReceived(function ($content) {
 
                         $message = Message::fromContent($content);

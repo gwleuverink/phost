@@ -1,9 +1,8 @@
 @use(\App\Enums\Framework)
 
 <div class="space-y-2">
-    {{-- <p>Choose a framework to connect to PHOST</p> --}}
 
-    <div class="flex flex-row px-2 space-x-4">
+    <div class="flex flex-row space-x-4 px-2">
         @foreach (Framework::cases() as $framework)
             <x-input.radio
                 wire:model.live="framework"
@@ -16,15 +15,24 @@
 
     <x-support.divider />
 
-    <x-support.config :framework="$this->selectedFramework" />
-
-    {{-- <p>Choose a SMTP port</p> --}}
+    <x-support.config
+        :framework="$this->selectedFramework"
+        :$port
+    />
 
     <form
-        action=""
-        class="pt-4"
+        wire:submit="save"
+        class="pt-6"
+        novalidate
     >
-        <x-input.text label="Port" />
+        <x-input.text
+            label="Port"
+            wire:model.lazy="port"
+            inputmode="numeric"
+            pattern="[0-9]"
+            maxlength="4"
+            x-mask="9999"
+        />
 
         <x-dialog.footer>
             <x-input.button

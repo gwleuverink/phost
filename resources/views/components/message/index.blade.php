@@ -108,6 +108,13 @@
                 @endif
             </button>
 
+            <button
+                x-on:click="$dispatch('open-settings-dialog')"
+                class="cursor-default transition-colors hover:text-neutral-500"
+            >
+                <x-heroicon-o-cog-8-tooth class="size-6" />
+            </button>
+
         </div>
 
         {{-- tab list --}}

@@ -3,16 +3,16 @@
     x-on:keydown.meta.r.prevent="
         window.location.href = '/{{ $this->message?->id }}';
     "
-    class="flex w-full h-screen"
+    class="flex h-screen w-full"
 >
 
-    <section class="flex flex-col w-4/12 h-full pt-3 overflow-y-scroll min-w-80 bg-gray-50">
+    <section class="flex h-full w-4/12 min-w-80 flex-col overflow-y-scroll bg-gray-50 pt-3">
 
         <label class="px-3">
             <input
                 placeholder="Search..."
                 wire:model.live="search"
-                class="w-full p-4 transition duration-200 bg-gray-100 rounded-lg focus:outline-none focus:ring-2"
+                class="w-full rounded-lg border-none bg-gray-100 p-4 transition duration-200 focus:outline-none focus:ring-2"
             >
         </label>
 
@@ -56,7 +56,7 @@
     @else
         <section
             wire:key="no-message"
-            class="flex flex-col items-center justify-center w-full h-full px-4 bg-white"
+            class="flex h-full w-full flex-col items-center justify-center bg-white px-4"
         >
             <x-heroicon-o-envelope
                 class="size-48 text-neutral-200"
@@ -77,7 +77,7 @@
     {{-- Dialogs --}}
     <x-dialog x-on:open-settings-dialog.window="open()">
         <x-dialog.panel>
-            <h2 class="mb-2 font-semibold">Configuration</h2>
+            <h2 class="mb-3 font-semibold">Configuration</h2>
 
             <livewire:settings />
         </x-dialog.panel>
