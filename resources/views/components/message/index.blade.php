@@ -46,8 +46,18 @@
                     </span>
                 </h3>
 
-                <p class="text-light text-neutral-400">
+                <p class="text-neutral-400">
+
                     To: {{ $message->parsed->getHeaderValue(Header::TO) }}
+
+                    <span
+                        x-cloak
+                        x-transition
+                        x-show="open"
+                        class="text-sm"
+                    >
+                        - {{ $message->size }} - {{ $message->created_at->format('Y/m/d g:i A') }}
+                    </span>
                 </p>
 
             </div>

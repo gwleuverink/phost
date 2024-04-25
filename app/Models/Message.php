@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Number;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use ZBateson\MailMimeParser\Message as ParsedMessage;
@@ -37,6 +38,13 @@ class Message extends Model
     {
         return Attribute::make(
             get: fn (): ParsedMessageContract => ParsedMessage::from($this->content, true)
+        )->shouldCache();
+    }
+
+    public function size(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Number::fileSize(strlen($this->content), precision: 2)
         )->shouldCache();
     }
 

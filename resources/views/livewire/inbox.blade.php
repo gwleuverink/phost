@@ -3,16 +3,16 @@
     x-on:keydown.meta.r.prevent="
         window.location.href = '/{{ $this->message?->id }}';
     "
-    class="flex h-screen w-full"
+    class="flex w-full h-screen"
 >
 
-    <section class="flex h-full w-4/12 min-w-80 flex-col overflow-y-scroll bg-gray-50 pt-3">
+    <section class="flex flex-col w-4/12 h-full pt-3 overflow-y-scroll min-w-80 bg-gray-50">
 
         <label class="px-3">
             <input
                 placeholder="Search..."
                 wire:model.live="search"
-                class="w-full rounded-lg bg-gray-100 p-4 transition duration-200 focus:outline-none focus:ring-2"
+                class="w-full p-4 transition duration-200 bg-gray-100 rounded-lg focus:outline-none focus:ring-2"
             >
         </label>
 
@@ -56,13 +56,31 @@
     @else
         <section
             wire:key="no-message"
-            class="flex h-full w-full items-center justify-around bg-white px-4"
+            class="flex flex-col items-center justify-center w-full h-full px-4 bg-white"
         >
             <x-heroicon-o-envelope
                 class="size-48 text-neutral-200"
                 stroke-width="1"
             />
+
+            <x-input.button
+                level="secondary"
+                x-on:click="$dispatch('open-settings-dialog')"
+                class="flex items-center"
+            >
+                <x-heroicon-c-cog-6-tooth class="mr-1 size-3 text-neutral-400" />
+                settings
+            </x-input.button>
         </section>
     @endif
+
+    {{-- Dialogs --}}
+    <x-dialog x-on:open-settings-dialog.window="open()">
+        <x-dialog.panel>
+            <h2 class="mb-2 font-semibold">Configuration</h2>
+
+            <livewire:settings />
+        </x-dialog.panel>
+    </x-dialog>
 
 </main>

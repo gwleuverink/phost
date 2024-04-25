@@ -16,6 +16,8 @@
 
 <body>
     {{ $slot }}
+
+    <x-support.dialog-provider />
 </body>
 
 @livewireScriptConfig
