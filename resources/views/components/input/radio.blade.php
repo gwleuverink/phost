@@ -15,13 +15,12 @@
             value="{{ $value }}"
             :id="$id('input')"
             type="radio"
-            
             @class([
                 'w-4 h-4 text-indigo-600 rounded-full read-only:ring-opacity-50',
-                'border-gray-300 ring-gray-300 focus:ring-indigo-600' => $errors->missing($model),
+                'border-gray-300 ring-gray-300 focus:ring-indigo-600' => $errors->missing(
+                    $model),
                 'border-red-400 ring-red-400 focus:ring-red-500' => $errors->has($model),
             ])
-
             @error($model)
                 aria-invalid="true"
                 aria-description="{{ $message }}"
