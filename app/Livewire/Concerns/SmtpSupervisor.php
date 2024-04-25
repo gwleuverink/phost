@@ -30,12 +30,15 @@ trait SmtpSupervisor
                     ->onMessageReceived(function ($content) {
 
                         $message = Message::fromContent($content);
-
-                        Notification::title(self::NOTIFICATION_TITLE)
-                            ->message($message->parsed->getHeaderValue(HeaderConsts::SUBJECT))
-                            ->show();
-
                         MessageReceived::dispatch($message);
+
+                        // Running as NativePHP app. Send out system notifications
+                        if (config('nativephp-internal.running')) {
+
+                            Notification::title(self::NOTIFICATION_TITLE)
+                                ->message($message->parsed->getHeaderValue(HeaderConsts::SUBJECT))
+                                ->show();
+                        }
 
                     })->serve();
             },
