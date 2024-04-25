@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\Smtp\Server;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -14,7 +16,9 @@
 uses(
     Tests\TestCase::class,
     // Illuminate\Foundation\Testing\RefreshDatabase::class,
-)->in('Feature');
+)->beforeEach(function () {
+    Server::fake();
+})->in('Feature');
 
 /*
 |--------------------------------------------------------------------------

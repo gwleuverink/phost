@@ -1,45 +1,63 @@
 @use('ZBateson\MailMimeParser\Header\HeaderConsts', 'Header')
 
-@props([
-    'message'
-])
+@props(['message'])
 
-
-@php
-    $parsed = $message->parsed();
-@endphp
-
-<section {{ $attributes }}
+<section
+    {{ $attributes }}
     x-tabs
     x-title="message-view"
     x-model="selectedTabIndex"
     x-data="{
         selectedTabIndex: 0,
     }"
-    class="flex flex-col w-full px-4 overflow-y-scroll bg-white"
+    class="flex w-full flex-col overflow-y-scroll bg-white px-4"
 >
 
-    <div class="relative flex items-center justify-between flex-shrink-0 h-48 mb-3">
+    <div class="relative mb-3 flex h-48 flex-shrink-0 items-center justify-between">
 
-        <div x-title="header-data" x-data="{ open: false }" class="flex">
+        <div
+            x-title="header-data"
+            x-data="{ open: false }"
+            class="flex"
+        >
 
-            <button x-on:click="open = !open" class="p-2 text-gray-400 transition-colors cursor-default hover:text-neutral-500">
-                <x-heroicon-m-chevron-right class="w-5 h-5 transition-transform" ::class="{ 'rotate-90': open }" />
+            <button
+                x-on:click="open = !open"
+                class="cursor-default p-2 text-gray-400 transition-colors hover:text-neutral-500"
+            >
+                <x-heroicon-m-chevron-right
+                    class="h-5 w-5 transition-transform"
+                    ::class="{ 'rotate-90': open }"
+                />
             </button>
 
             <div class="flex flex-col">
 
-
                 <h3 class="text-lg font-semibold">
-                    {{ $parsed->getHeaderValue(Header::SUBJECT) }}
+                    {{ $message->parsed->getHeaderValue(Header::SUBJECT) }}
 
-                    <span x-show="open" x-cloak x-transition class="mx-1 text-base font-normal text-neutral-400">
-                        &lt;{{ $parsed->getHeaderValue(Header::FROM) }}&gt;
+                    <span
+                        x-cloak
+                        x-transition
+                        x-show="open"
+                        class="mx-1 text-base font-normal text-neutral-400"
+                    >
+                        &lt;{{ $message->parsed->getHeaderValue(Header::FROM) }}&gt;
                     </span>
                 </h3>
 
-                <p class="text-neutral-400 text-light">
-                    To: {{ $parsed->getHeaderValue(Header::TO) }}
+                <p class="text-neutral-400">
+
+                    To: {{ $message->parsed->getHeaderValue(Header::TO) }}
+
+                    <span
+                        x-cloak
+                        x-transition
+                        x-show="open"
+                        class="text-sm"
+                    >
+                        - {{ $message->size }} - {{ $message->created_at->format('Y/m/d g:i A') }}
+                    </span>
                 </p>
 
             </div>
@@ -48,79 +66,95 @@
 
         <div class="flex space-x-4 text-neutral-400">
 
-            <button class="transition-colors cursor-default hover:text-neutral-500">
+            <button
+                wire:click="selectPrevious"
+                class="cursor-default transition-colors hover:text-neutral-500"
+            >
                 <x-heroicon-o-arrow-left-circle class="size-6" />
             </button>
 
-            <button class="transition-colors cursor-default hover:text-neutral-500">
+            <button
+                wire:click="selectNext"
+                class="cursor-default transition-colors hover:text-neutral-500"
+            >
                 <x-heroicon-o-arrow-right-circle class="size-6" />
             </button>
 
-            <button x-on:click="Helpers.print(@js($parsed->getHtmlContent() ?? $parsed->getTextContent()))" class="transition-colors cursor-default hover:text-neutral-500">
+            <button
+                x-on:click="Helpers.print(@js($message->parsed->getHtmlContent() ?? $message->parsed->getTextContent()))"
+                class="cursor-default transition-colors hover:text-neutral-500"
+            >
                 <x-heroicon-o-printer class="size-6" />
             </button>
 
-            <button wire:click="deleteMessage({{ $message->id }})" class="transition-colors cursor-default hover:text-neutral-500 ">
+            <button
+                wire:click="deleteMessage({{ $message->id }})"
+                class="cursor-default transition-colors hover:text-neutral-500"
+            >
                 <x-heroicon-o-trash class="size-6" />
             </button>
 
-            <button wire:click="toggleBookmark({{ $message->id }})" class="transition-colors cursor-default hover:text-neutral-500">
-                @if($message->bookmarked)
-                    <x-heroicon-o-bookmark class="transition-colors size-6 text-rose-500 hover:text-rose-600" fill="currentColor" />
+            <button
+                wire:click="toggleBookmark({{ $message->id }})"
+                class="cursor-default transition-colors hover:text-neutral-500"
+            >
+                @if ($message->bookmarked)
+                    <x-heroicon-o-bookmark
+                        fill="currentColor"
+                        class="size-6 text-rose-500 transition-colors hover:text-rose-600"
+                    />
                 @else
                     <x-heroicon-o-bookmark class="size-6" />
                 @endif
             </button>
 
+            <button
+                x-on:click="$dispatch('open-settings-dialog')"
+                class="cursor-default transition-colors hover:text-neutral-500"
+            >
+                <x-heroicon-o-cog-8-tooth class="size-6" />
+            </button>
+
         </div>
 
         {{-- tab list --}}
-        <nav x-tabs:list class="absolute bottom-0 flex space-x-2 text-sm text-neutral-400">
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
-                HTML
-            </button>
+        <nav
+            x-tabs:list
+            class="absolute bottom-0 flex space-x-2 text-sm text-neutral-400"
+        >
+            <x-message.tab-button>
+                Preview
+            </x-message.tab-button>
 
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
+            <x-message.tab-button>
                 Source
-            </button>
+            </x-message.tab-button>
 
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
+            <x-message.tab-button>
                 Text
-            </button>
+            </x-message.tab-button>
 
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
+            <x-message.tab-button>
                 Raw
-            </button>
+            </x-message.tab-button>
 
-            <button x-tabs:tab type="button"
-                class="px-3 py-1 transition rounded-md cursor-default"
-                x-bind:class="$tab.isSelected ? 'bg-neutral-100 text-neutral-500 shadow-inner': 'hover:bg-neutral-100 hover:text-neutral-500'"
-            >
+            <x-message.tab-button>
                 Headers
-            </button>
+            </x-message.tab-button>
         </nav>
     </div>
 
     {{-- tab panels --}}
-    <section x-tabs:panels x-cloak>
+    <section
+        x-cloak
+        x-tabs:panels
+    >
 
-        <x-message.tabs.preview :$message />
-        <x-message.tabs.source :$message />
-        <x-message.tabs.text :$message />
-        <x-message.tabs.raw :$message />
-        <x-message.tabs.headers :$message />
+        <x-message.panel.preview :$message />
+        <x-message.panel.source :$message />
+        <x-message.panel.text :$message />
+        <x-message.panel.raw :$message />
+        <x-message.panel.headers :$message />
 
     </section>
 

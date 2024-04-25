@@ -2,9 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Number;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use ZBateson\MailMimeParser\Message as ParsedMessage;
+use ZBateson\MailMimeParser\IMessage as ParsedMessageContract;
 
+/**
+ * @property ParsedMessageContract $parsed
+ */
 class Message extends Model
 {
     protected $fillable = [
@@ -25,9 +31,31 @@ class Message extends Model
         ]);
     }
 
-    public function parsed(): ParsedMessage
+    //---------------------------------------------------------------
+    // Attributes
+    //---------------------------------------------------------------
+    public function parsed(): Attribute
     {
-        return ParsedMessage::from($this->content, true);
+        return Attribute::make(
+            get: fn (): ParsedMessageContract => ParsedMessage::from($this->content, true)
+        )->shouldCache();
+    }
+
+    public function size(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => Number::fileSize(strlen($this->content), precision: 2)
+        )->shouldCache();
+    }
+
+    //---------------------------------------------------------------
+    // Helpers
+    //---------------------------------------------------------------
+    public function toggleBookmark(): void
+    {
+        $this->update([
+            'bookmarked' => ! $this->bookmarked,
+        ]);
     }
 
     public function markRead(): void
@@ -38,13 +66,6 @@ class Message extends Model
 
         $this->update([
             'read_at' => now(),
-        ]);
-    }
-
-    public function toggleBookmark(): void
-    {
-        $this->update([
-            'bookmarked' => ! $this->bookmarked,
         ]);
     }
 }

@@ -1,0 +1,6 @@
+{
+    "preset": "tighten",
+    "disabled": [
+        "QualifiedNamesOnlyForClassName"
+    ]
+}

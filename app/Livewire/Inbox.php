@@ -3,25 +3,37 @@
 namespace App\Livewire;
 
 use App\Models\Message;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\Computed;
-use Livewire\Attributes\Title;
-use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\Attributes\Url;
+use Livewire\Attributes\Title;
+use Livewire\Attributes\Computed;
+use Illuminate\Support\Collection;
+use App\Livewire\Concerns\SmtpSupervisor;
+use App\Livewire\Concerns\MessageControls;
 
-#[Title('Inbox')]
+/**
+ * @property ?Message $message
+ * @property Collection $inbox
+ */
+#[Title('Phost | Inbox')]
 class Inbox extends Component
 {
+    use MessageControls;
+    use SmtpSupervisor;
+
     #[Url]
     public string $search = '';
 
     public ?int $selectedMessageId = null;
 
-    public function mount($selectedMessageId = null)
+    public function mount($messageId = null)
     {
-        $this->selectedMessageId = $selectedMessageId;
+        if ($messageId) {
+            $this->selectMessage($messageId);
+        }
 
-        $this->message?->markRead();
+        // Start the SMTP server
+        $this->supervisor(); // TODO: Move to scheduler
     }
 
     public function selectMessage(int $id)
@@ -29,27 +41,6 @@ class Inbox extends Component
         $this->selectedMessageId = $id;
 
         $this->message?->markRead();
-
-        // Not pretty, but most reliable way to ensure properly sized iframe
-        $this->dispatch('reload-message-preview');
-    }
-
-    public function deleteMessage(int $id)
-    {
-        Message::findOrFail($id)->delete();
-
-        if ($id === $this->selectedMessageId) {
-            $this->selectedMessageId = null;
-        }
-    }
-
-    public function toggleBookmark(int $id)
-    {
-        Message::findOrFail($id)->toggleBookmark();
-
-        $this->message?->markRead();
-
-        $this->dispatch('reload-message-preview');
     }
 
     #[Computed()]
@@ -60,7 +51,6 @@ class Inbox extends Component
         }
 
         return Message::find($this->selectedMessageId);
-
     }
 
     #[Computed()]
@@ -68,7 +58,7 @@ class Inbox extends Component
     {
         return Message::query()
             ->when($this->search, fn ($query) => $query
-                ->where('content', 'like', '%'.trim($this->search).'%')
+                ->where('content', 'like', '%' . trim($this->search) . '%')
             )
             ->orderByDesc('bookmarked')
             ->latest()
