@@ -7,7 +7,7 @@
 @php
     $element = $href ? 'a' : 'button';
 
-    $defaultClasses = 'text-sm font-medium rounded shadow-sm transition-all disabled:opacity-50 cursor-default';
+    $defaultClasses = 'text-sm font-medium rounded shadow-sm transition-all disabled:opacity-50 cursor-default select-none';
 
     $levelClasses = match ($level) {
         'round' => 'rounded-full bg-indigo-600 p-1 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 hover:scale-110 focus-visible:scale-110',
