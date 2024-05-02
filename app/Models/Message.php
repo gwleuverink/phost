@@ -43,8 +43,14 @@ class Message extends Model
 
     public function size(): Attribute
     {
+        // NOTE: Number::fileSize doesn't work since NativePHP is missing the 'intl' extension
         return Attribute::make(
-            get: fn () => Number::fileSize(strlen($this->content), precision: 2)
+            get: function() {
+                $base = log(strlen($this->content)) / log(1024);
+                $suffix = array("", "KB", "MB", "GB", "TB");
+                $floor = floor($base);
+                return round(pow(1024, $base - $floor), 1) . $suffix[$floor];
+            }
         )->shouldCache();
     }
 
