@@ -7,12 +7,10 @@ use App\Enums\Framework;
 use App\Livewire\Concerns\Config;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
-use App\Livewire\Concerns\SmtpSupervisor;
 
 class Settings extends Component
 {
     use Config;
-    use SmtpSupervisor;
 
     public ?string $framework = 'Laravel';
 
@@ -29,8 +27,8 @@ class Settings extends Component
         $validated = $this->validate();
         $this->config->fill($validated)->save();
 
-        // Start the SMTP server with updated port nr
-        $this->supervisor();
+        // Kill SMTP server with old port number
+        // Start the SMTP server with updated port nr (via supervisor command in scheduler)
     }
 
     #[Computed()]
