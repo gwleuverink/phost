@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42c0b1c78e6dc211d408b90eef264da9",
+    "content-hash": "e46f92d3cdafa0ceaec4d79092171dfb",
     "packages": [
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -2078,16 +2078,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.4.11",
+            "version": "v3.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0"
+                "reference": "54dd265c17f7b5200627eb9690590e7cbbad1027"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0",
-                "reference": "8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/54dd265c17f7b5200627eb9690590e7cbbad1027",
+                "reference": "54dd265c17f7b5200627eb9690590e7cbbad1027",
                 "shasum": ""
             },
             "require": {
@@ -2102,7 +2102,7 @@
             },
             "require-dev": {
                 "calebporzio/sushi": "^2.1",
-                "laravel/framework": "^10.0|^11.0",
+                "laravel/framework": "^10.15.0|^11.0",
                 "laravel/prompts": "^0.1.6",
                 "mockery/mockery": "^1.3.1",
                 "orchestra/testbench": "^8.21.0|^9.0",
@@ -2142,7 +2142,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.4.11"
+                "source": "https://github.com/livewire/livewire/tree/v3.4.12"
             },
             "funding": [
                 {
@@ -2150,7 +2150,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-24T12:14:15+00:00"
+            "time": "2024-05-02T17:10:37+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2255,16 +2255,16 @@
         },
         {
             "name": "nativephp/electron",
-            "version": "0.6.1",
+            "version": "0.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/NativePHP/electron.git",
-                "reference": "f84dc14a7aa1dbb9380ef568b4296e79956c101c"
+                "reference": "76e4601c2d43f809ee8306e75f3e3f17a38f6ccc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NativePHP/electron/zipball/f84dc14a7aa1dbb9380ef568b4296e79956c101c",
-                "reference": "f84dc14a7aa1dbb9380ef568b4296e79956c101c",
+                "url": "https://api.github.com/repos/NativePHP/electron/zipball/76e4601c2d43f809ee8306e75f3e3f17a38f6ccc",
+                "reference": "76e4601c2d43f809ee8306e75f3e3f17a38f6ccc",
                 "shasum": ""
             },
             "require": {
@@ -2323,28 +2323,28 @@
                 "nativephp"
             ],
             "support": {
-                "source": "https://github.com/NativePHP/electron/tree/0.6.1"
+                "source": "https://github.com/NativePHP/electron/tree/0.6.2"
             },
-            "time": "2024-05-01T03:26:58+00:00"
+            "time": "2024-05-01T19:45:29+00:00"
         },
         {
             "name": "nativephp/laravel",
-            "version": "0.5.0",
+            "version": "0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/NativePHP/laravel.git",
-                "reference": "691c8c2f9d894e6ead65e274046825e179ef8fd5"
+                "reference": "485835c3dd00396cb76bccc941663822c5341ef3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NativePHP/laravel/zipball/691c8c2f9d894e6ead65e274046825e179ef8fd5",
-                "reference": "691c8c2f9d894e6ead65e274046825e179ef8fd5",
+                "url": "https://api.github.com/repos/NativePHP/laravel/zipball/485835c3dd00396cb76bccc941663822c5341ef3",
+                "reference": "485835c3dd00396cb76bccc941663822c5341ef3",
                 "shasum": ""
             },
             "require": {
                 "illuminate/contracts": "^10.0|^11.0",
                 "php": "^8.1",
-                "spatie/laravel-package-tools": "^1.14.0",
+                "spatie/laravel-package-tools": "^1.16.4",
                 "symfony/finder": "^6.2|^7.0"
             },
             "require-dev": {
@@ -2391,6 +2391,11 @@
                     "name": "Marcel Pociot",
                     "email": "marcel@beyondco.de",
                     "role": "Developer"
+                },
+                {
+                    "name": "Simon Hamp",
+                    "email": "simon.hamp@me.com",
+                    "role": "Developer"
                 }
             ],
             "description": "Laravel wrapper for the NativePHP framework.",
@@ -2402,9 +2407,9 @@
             ],
             "support": {
                 "issues": "https://github.com/NativePHP/laravel/issues",
-                "source": "https://github.com/NativePHP/laravel/tree/0.5.0"
+                "source": "https://github.com/NativePHP/laravel/tree/0.5.2"
             },
-            "time": "2024-04-01T16:29:53+00:00"
+            "time": "2024-05-02T15:45:00+00:00"
         },
         {
             "name": "nativephp/php-bin",
@@ -11004,16 +11009,16 @@
         },
         {
             "name": "spatie/flare-client-php",
-            "version": "1.4.4",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/flare-client-php.git",
-                "reference": "17082e780752d346c2db12ef5d6bee8e835e399c"
+                "reference": "9aa60f6ded35a774554e7a5256dca12b72693b78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/17082e780752d346c2db12ef5d6bee8e835e399c",
-                "reference": "17082e780752d346c2db12ef5d6bee8e835e399c",
+                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/9aa60f6ded35a774554e7a5256dca12b72693b78",
+                "reference": "9aa60f6ded35a774554e7a5256dca12b72693b78",
                 "shasum": ""
             },
             "require": {
@@ -11061,7 +11066,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/flare-client-php/issues",
-                "source": "https://github.com/spatie/flare-client-php/tree/1.4.4"
+                "source": "https://github.com/spatie/flare-client-php/tree/1.5.0"
             },
             "funding": [
                 {
@@ -11069,7 +11074,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-31T14:18:45+00:00"
+            "time": "2024-05-02T13:18:42+00:00"
         },
         {
             "name": "spatie/ignition",
@@ -11156,16 +11161,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "2.6.2",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "42d986f4ab9d667020264a7481190a4606ebbeb0"
+                "reference": "f52124d50122611e8a40f628cef5c19ff6cc5b57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/42d986f4ab9d667020264a7481190a4606ebbeb0",
-                "reference": "42d986f4ab9d667020264a7481190a4606ebbeb0",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/f52124d50122611e8a40f628cef5c19ff6cc5b57",
+                "reference": "f52124d50122611e8a40f628cef5c19ff6cc5b57",
                 "shasum": ""
             },
             "require": {
@@ -11174,7 +11179,7 @@
                 "ext-mbstring": "*",
                 "illuminate/support": "^10.0|^11.0",
                 "php": "^8.1",
-                "spatie/flare-client-php": "^1.3.5",
+                "spatie/flare-client-php": "^1.5",
                 "spatie/ignition": "^1.14",
                 "symfony/console": "^6.2.3|^7.0",
                 "symfony/var-dumper": "^6.2.3|^7.0"
@@ -11244,7 +11249,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-30T13:56:21+00:00"
+            "time": "2024-05-02T13:42:49+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",

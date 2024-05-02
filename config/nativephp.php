@@ -13,7 +13,7 @@ return [
      * usually in the form of a reverse domain name.
      * For example: com.nativephp.app
      */
-    'app_id' => env('NATIVEPHP_APP_ID'),
+    'app_id' => env('NATIVEPHP_APP_ID', 'com.phost.app'),
 
     /**
      * If your application allows deep linking, you can specify the scheme
@@ -29,7 +29,7 @@ return [
     /**
      * The author of your application.
      */
-    'author' => env('NATIVEPHP_APP_AUTHOR'),
+    'author' => env('NATIVEPHP_APP_AUTHOR', 'Willem Leuverink'),
 
     /**
      * The default service provider for your application. This provider

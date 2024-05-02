@@ -1,5 +1,4 @@
 <main
-    {{-- wire:poll.keep-alive.6s="supervisor" --}}
     x-on:keydown.meta.r.prevent="
         window.location.href = '/{{ $this->message?->id }}';
     "

@@ -4,11 +4,12 @@ namespace App\Livewire;
 
 use App\Models\Message;
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Attributes\Title;
+use App\Events\MessageReceived;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Collection;
-use App\Livewire\Concerns\SmtpSupervisor;
 use App\Livewire\Concerns\MessageControls;
 
 /**
@@ -19,7 +20,6 @@ use App\Livewire\Concerns\MessageControls;
 class Inbox extends Component
 {
     use MessageControls;
-    // use SmtpSupervisor;
 
     #[Url]
     public string $search = '';
@@ -31,9 +31,6 @@ class Inbox extends Component
         if ($messageId) {
             $this->selectMessage($messageId);
         }
-
-        // Start the SMTP server
-        // $this->supervisor(); // TODO: Move to scheduler
     }
 
     public function selectMessage(int $id)
@@ -63,5 +60,16 @@ class Inbox extends Component
             ->orderByDesc('bookmarked')
             ->latest()
             ->get();
+    }
+
+    #[On('native:' . MessageReceived::class)]
+    public function messageReceived()
+    {
+        // TODO: Implement NativePHP events with Echo
+        // https://nativephp.com/docs/1/digging-deeper/broadcasting
+        // https://laravel.com/docs/11.x/broadcasting#client-side-installation
+        // Laravel websockets doesn't support L11. Can we use Reverb instead? https://laravel.com/docs/11.x/reverb
+
+        dd('Received new message');
     }
 }

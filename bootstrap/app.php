@@ -15,10 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withSchedule(function (Schedule $schedule) {
 
         // Make sure the SMTP server is always up
-        $schedule->command('serve:smtp')
+        $schedule->command('smtp:serve')
             ->withoutOverlapping()
-            ->everyFiveSeconds()
-            ->runInBackground();
+            ->runInBackground()
+            ->everySecond();
     })
 
     ->withMiddleware(function (Middleware $middleware) {
