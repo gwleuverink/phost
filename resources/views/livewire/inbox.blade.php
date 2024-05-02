@@ -48,7 +48,7 @@
 
     </section>
 
-    <div class="w-full">
+    <div class="w-full overflow-y-auto">
 
         @if ($this->message)
             <x-message
