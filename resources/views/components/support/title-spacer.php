@@ -1,7 +1,6 @@
 <div
     x-title="title-spacer"
-    class="h-[30px] w-full"
-    style="-webkit-app-region: drag"
+    style="-webkit-app-region: drag; height: 30px; width: 100%; position: absolute; top: 0"
 >
-    <!-- Your Custom Title Content -->
+    <!-- // -->
 </div>

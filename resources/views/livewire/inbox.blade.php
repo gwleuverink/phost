@@ -1,14 +1,12 @@
 <main
-    wire:poll.keep-alive.6s="supervisor"
+    {{-- wire:poll.keep-alive.6s="supervisor" --}}
     x-on:keydown.meta.r.prevent="
         window.location.href = '/{{ $this->message?->id }}';
     "
     class="flex h-screen w-full"
 >
 
-    <section class="flex h-full w-4/12 min-w-80 flex-col overflow-y-scroll bg-gray-50 pt-3">
-
-        <x-support.title-spacer />
+    <section class="flex h-full w-4/12 min-w-80 flex-col overflow-y-scroll bg-gray-50 pt-8">
 
         <label class="px-3">
             <input
@@ -51,8 +49,6 @@
     </section>
 
     <div class="w-full">
-
-        <x-support.title-spacer />
 
         @if ($this->message)
             <x-message

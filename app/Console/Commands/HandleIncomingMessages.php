@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 
 class HandleIncomingMessages extends Command
 {
-    protected $signature = 'serve:smtp';
+    protected $signature = 'smtp:serve';
 
     protected $description = 'Starts SMTP server & handles incoming messages';
 

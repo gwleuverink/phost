@@ -27,3 +27,5 @@ Dockerfile-php-build
 
 _ide_helper.php
 .phpstorm.meta.php
+
+dist

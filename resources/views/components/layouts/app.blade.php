@@ -15,6 +15,8 @@
 </head>
 
 <body>
+    <x-support.title-spacer />
+
     {{ $slot }}
 
     <x-support.dialog-provider />

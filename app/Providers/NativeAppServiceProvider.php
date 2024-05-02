@@ -18,8 +18,8 @@ class NativeAppServiceProvider implements ProvidesPhpIni
             ->hideMenu()
             ->width(1200)
             ->height(740)
-            ->minWidth(540)
-            ->minHeight(500);
+            ->minWidth(700)
+            ->minHeight(600);
     }
 
     /**

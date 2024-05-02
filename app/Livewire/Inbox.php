@@ -19,7 +19,7 @@ use App\Livewire\Concerns\MessageControls;
 class Inbox extends Component
 {
     use MessageControls;
-    use SmtpSupervisor;
+    // use SmtpSupervisor;
 
     #[Url]
     public string $search = '';
@@ -33,7 +33,7 @@ class Inbox extends Component
         }
 
         // Start the SMTP server
-        $this->supervisor(); // TODO: Move to scheduler
+        // $this->supervisor(); // TODO: Move to scheduler
     }
 
     public function selectMessage(int $id)
