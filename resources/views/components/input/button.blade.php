@@ -21,6 +21,4 @@
     'type' => $type,
     'href' => $href,
     'class' => "{$defaultClasses} {$levelClasses}",
-]) }}>
-    {{ $slot }}
-</{{ $element }}>
+]) }}>{{ $slot }}</{{ $element }}>
