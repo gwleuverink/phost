@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/gwleuverink/phost/storage/app/public/icon.png" alt="Logo">
+<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/icon.png?raw=true" alt="Logo">
 </p>
 
 <p align="center">
