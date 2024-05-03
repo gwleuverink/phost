@@ -53,6 +53,9 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
+        "post-install-cmd": [
+            "cp ./storage/app/public/icon.png ./vendor/nativephp/electron/resources/js/resources/icon.png"
+        ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
             "@php artisan ide-helper:generate --ansi --helpers",
