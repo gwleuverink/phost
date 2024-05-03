@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Message;
 use Livewire\Component;
 use App\Enums\Framework;
 use App\Livewire\Concerns\Config;
@@ -24,11 +25,22 @@ class Settings extends Component
 
     public function save()
     {
+        $oldPort = $this->config->port;
+
         $validated = $this->validate();
         $this->config->fill($validated)->save();
 
         // Kill SMTP server with old port number
-        // Start the SMTP server with updated port nr (via supervisor command in scheduler)
+        if ($this->port !== $oldPort) {
+            // TODO: Start the SMTP server with updated port nr (via supervisor command in scheduler)
+        }
+    }
+
+    public function clearInbox()
+    {
+        Message::query()->truncate();
+
+        return $this->redirectRoute('inbox', navigate: true);
     }
 
     #[Computed()]

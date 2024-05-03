@@ -1,5 +1,6 @@
 <main
     x-on:keydown.meta.r.prevent="
+        {{-- Make sure we stay on the same page when refreshing (workaround for snappier UI) --}}
         window.location.href = '/{{ $this->message?->id }}';
     "
     class="flex h-screen w-full"
@@ -80,7 +81,7 @@
     {{-- Dialogs --}}
     <x-dialog x-on:open-settings-dialog.window="open()">
         <x-dialog.panel>
-            <h2 class="mb-3 font-semibold">Configuration</h2>
+            <h2 class="mb-3 font-semibold text-neutral-700">Configuration</h2>
 
             <livewire:settings />
         </x-dialog.panel>

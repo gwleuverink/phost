@@ -34,6 +34,24 @@
             x-mask="9999"
         />
 
+        {{-- Danger zone --}}
+        <div>
+
+            <h2 class="-mb-2 mt-6 text-base font-semibold text-neutral-700">Danger zone</h2>
+            <x-support.divider />
+
+            <x-input.button
+                type="button"
+                level="danger"
+                wire:click="clearInbox"
+                wire:confirm="Are you sure you want to delete all messages?"
+                class="flex items-center"
+            >
+                <x-heroicon-c-trash class="mr-1 size-3" />
+                Clear inbox
+            </x-input.button>
+        </div>
+
         <x-dialog.footer>
             <x-input.button
                 type="button"
