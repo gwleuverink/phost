@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/icon.png?raw=true" alt="Logo" style="max-width: 260px;">
+<span style="max-width: 260px;"><img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/icon.png?raw=true" alt="Logo"></span>
 </p>
 
 <p align="center">
