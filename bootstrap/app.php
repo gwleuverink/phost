@@ -16,10 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // Make sure the SMTP server is always up
         $schedule->command('smtp:serve')
-            // So the command won't overlap for the next minute (sub-minute will be blocked regardless)
-            ->withoutOverlapping()
-            // Don't run in background, so the process closes when the app closes
-            // ->runInBackground()
+            // ->withoutOverlapping() // Won't work when enabled
+            // ->runInBackground() // Server won't stop when app closes when enabled
             ->everySecond();
     })
 

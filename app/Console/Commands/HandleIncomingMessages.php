@@ -33,7 +33,9 @@ class HandleIncomingMessages extends Command
         $port = $this->config()->port;
 
         try {
-            logger("SUPERVISOR | Starting SMTP server on :{$port}");
+
+            logger("SUPERVISOR | Keeping SMTP server alive on :{$port}");
+
             Server::new($port)
                 ->onMessageReceived(function ($content) {
 
@@ -45,12 +47,14 @@ class HandleIncomingMessages extends Command
                         ->show();
 
                 })->serve();
+
         } catch (Throwable $th) {
+
             if (! str($th->getMessage())->contains('EADDRINUSE')) {
                 throw $th;
             }
 
-            logger("SUPERVISOR | Port already in use :{$port}");
+            logger("SUPERVISOR | Port in use :{$port}");
 
             return Command::FAILURE;
         }
