@@ -10,6 +10,7 @@ use Livewire\Attributes\Title;
 use App\Events\MessageReceived;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
 use App\Livewire\Concerns\MessageControls;
 
 /**
@@ -28,6 +29,11 @@ class Inbox extends Component
 
     public function mount($messageId = null)
     {
+        // NativePHP's supervisor seems to be delayed slightly.
+        // We'll invoke the serve command immediately and
+        // use the scheduler as a restart mechanism.
+        Artisan::queue('smtp:serve');
+
         if ($messageId) {
             $this->selectMessage($messageId);
         }
