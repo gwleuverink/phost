@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Throwable;
 use App\Models\Message;
 use App\Settings\Config;
 use App\Services\Smtp\Server;
@@ -30,23 +31,29 @@ class HandleIncomingMessages extends Command
     public function handle()
     {
         $port = $this->config()->port;
-        logger("SUPERVISOR | Starting SMTP server on :{$port}");
 
-        Server::new($port)
-            ->onMessageReceived(function ($content) {
+        try {
+            logger("SUPERVISOR | Starting SMTP server on :{$port}");
+            Server::new($port)
+                ->onMessageReceived(function ($content) {
 
-                $message = Message::fromContent($content);
-                MessageReceived::dispatch($message);
-
-                // Running as NativePHP app. Send out system notifications
-                if (config('nativephp-internal.running')) {
+                    $message = Message::fromContent($content);
+                    MessageReceived::dispatch($message);
 
                     Notification::title(self::NOTIFICATION_TITLE)
                         ->message($message->parsed->getHeaderValue(HeaderConsts::SUBJECT))
                         ->show();
-                }
 
-            })->serve();
+                })->serve();
+        } catch (Throwable $th) {
+            if (! str($th->getMessage())->contains('EADDRINUSE')) {
+                throw $th;
+            }
+
+            logger("SUPERVISOR | Port already in use :{$port}");
+
+            return Command::FAILURE;
+        }
 
         return Command::SUCCESS;
     }
