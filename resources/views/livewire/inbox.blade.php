@@ -79,7 +79,10 @@
     </div>
 
     {{-- Dialogs --}}
-    <x-dialog x-on:open-settings-dialog.window="open()">
+    <x-dialog
+        x-on:open-settings-dialog.window="open()"
+        x-on:close-settings-dialog.window="close()"
+    >
         <x-dialog.panel>
             <h2 class="mb-3 font-semibold text-neutral-700">Configuration</h2>
 

@@ -30,6 +30,8 @@ class Settings extends Component
         $validated = $this->validate();
         $this->config->fill($validated)->save();
 
+        $this->dispatch('close-settings-dialog');
+
         // Kill SMTP server with old port number
         if ($this->port !== $oldPort) {
             // TODO: Start the SMTP server with updated port nr (via supervisor command in scheduler)
