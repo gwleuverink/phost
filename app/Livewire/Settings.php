@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Message;
 use Livewire\Component;
 use App\Enums\Framework;
+use App\Services\Smtp\Server;
 use App\Livewire\Concerns\Config;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
@@ -22,13 +23,16 @@ class Settings extends Component
     public int $port;
 
     #[Validate('required|in:system,light,dark')]
-    public string $color_scheme;
+    public string $theme;
 
     public function mount()
     {
         $this->fill($this->config->toArray());
     }
 
+    //---------------------------------------------------------------
+    // Public API
+    //---------------------------------------------------------------
     public function save()
     {
         $oldPort = $this->config->port;
@@ -37,11 +41,12 @@ class Settings extends Component
 
         $this->config->fill($validated)->save();
 
+        $this->activateTheme();
         $this->dispatch('close-settings-dialog');
 
-        // Kill SMTP server with old port number
+        // Stop the server & restart picked up by the scheduler
         if ($this->port !== $oldPort) {
-            // TODO: Start the SMTP server with updated port nr (via supervisor command in scheduler)
+            Server::new($oldPort)->kill();
         }
     }
 
@@ -52,9 +57,33 @@ class Settings extends Component
         return $this->redirectRoute('inbox', navigate: true);
     }
 
+
+    //---------------------------------------------------------------
+    // Hooks
+    //---------------------------------------------------------------
+    public function updatedTheme()
+    {
+        $this->activateTheme();
+    }
+
+    //---------------------------------------------------------------
+    // Computed properties
+    //---------------------------------------------------------------
     #[Computed()]
     public function selectedFramework(): ?Framework
     {
         return Framework::tryFrom($this->framework);
+    }
+
+    //---------------------------------------------------------------
+    // MISC
+    //---------------------------------------------------------------
+    public function activateTheme()
+    {
+        match ($this->theme) {
+            'system' => $this->js("document.documentElement.classList.remove('light', 'dark')"),
+            'dark' => $this->js("document.documentElement.classList.remove('light'); document.documentElement.classList.add('dark')"),
+            'light' => $this->js("document.documentElement.classList.remove('dark'); document.documentElement.classList.add('light')"),
+        };
     }
 }

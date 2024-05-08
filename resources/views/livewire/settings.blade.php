@@ -41,13 +41,13 @@
         >
 
             <x-input.radio
-                wire:model="color_scheme"
+                wire:model.live="theme"
                 label="system"
                 value="system"
             />
 
             <x-input.radio
-                wire:model="color_scheme"
+                wire:model.live="theme"
                 value="light"
             >
                 <x-slot:label
@@ -58,7 +58,7 @@
             </x-input.radio>
 
             <x-input.radio
-                wire:model="color_scheme"
+                wire:model.live="theme"
                 value="dark"
             >
                 <x-slot:label

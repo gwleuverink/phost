@@ -1,5 +1,12 @@
+@php
+    $config = resolve(\App\Settings\Config::class);
+@endphp
+
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html
+    lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    class="{{ $config->theme !== 'system' ? $config->theme : null }}"
+>
 
 <head>
     <meta charset="utf-8">

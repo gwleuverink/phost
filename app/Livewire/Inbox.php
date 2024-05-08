@@ -39,6 +39,9 @@ class Inbox extends Component
         }
     }
 
+    //---------------------------------------------------------------
+    // Public API
+    //---------------------------------------------------------------
     public function selectMessage(int $id)
     {
         $this->selectedMessageId = $id;
@@ -46,6 +49,23 @@ class Inbox extends Component
         $this->message?->markRead();
     }
 
+
+    public function restartServer(?int $port = null)
+    {
+        $port = $port ?? $this->config->port;
+
+        // Kill stray processes on configured port
+        Server::new($port)->kill();
+
+        // NativePHP's supervisor seems to be delayed slightly.
+        // We'll invoke the serve command immediately and
+        // use the scheduler as a restart mechanism.
+        Artisan::queue('smtp:serve');
+    }
+
+    //---------------------------------------------------------------
+    // Computed properties
+    //---------------------------------------------------------------
     #[Computed()]
     public function message(): ?Message
     {
@@ -68,6 +88,9 @@ class Inbox extends Component
             ->get();
     }
 
+    //---------------------------------------------------------------
+    // Listeners
+    //---------------------------------------------------------------
     #[On('native:' . MessageReceived::class)]
     public function messageReceived()
     {
@@ -76,18 +99,5 @@ class Inbox extends Component
         // Laravel websockets doesn't support L11. Can we use Reverb instead? https://laravel.com/docs/11.x/reverb
 
         dd('Received new message');
-    }
-
-    public function restartServer(?int $port = null)
-    {
-        $port = $port ?? $this->config->port;
-
-        // Kill stray processes on configured port
-        Server::new($port)->kill();
-
-        // NativePHP's supervisor seems to be delayed slightly.
-        // We'll invoke the serve command immediately and
-        // use the scheduler as a restart mechanism.
-        Artisan::queue('smtp:serve');
     }
 }
