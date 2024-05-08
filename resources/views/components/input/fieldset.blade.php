@@ -5,7 +5,7 @@
 
 <fieldset @class([
     'relative pt-6 mt-10 pb-4 border-gray-300',
-    'border-t' => !$bordered,
+    'border rounded-md px-3' => !$bordered,
     'ring-1 ring-inset ring-gray-300 shadow-sm px-4 rounded-lg' => $bordered,
 ])>
 

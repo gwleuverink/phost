@@ -23,6 +23,10 @@
                 'border-red-400 ring-red-400 focus:ring-red-500' => $errors->has($model),
             ])
 
+            @if(! $attributes->get('name'))
+                name="{{ $attributes->get('wire:model') }}"
+            @endif
+
             @error($model)
                 aria-invalid="true"
                 aria-description="{{ $message }}"
