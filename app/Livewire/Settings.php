@@ -9,6 +9,9 @@ use App\Livewire\Concerns\Config;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 
+/**
+ * Note that the property casing is non-standard, because we're mapping directly to the config object
+ */
 class Settings extends Component
 {
     use Config;
@@ -17,6 +20,9 @@ class Settings extends Component
 
     #[Validate('required|numeric|min_digits:4|starts_with:25')]
     public int $port;
+
+    #[Validate('required|in:system,light,dark')]
+    public string $color_scheme;
 
     public function mount()
     {
@@ -28,6 +34,7 @@ class Settings extends Component
         $oldPort = $this->config->port;
 
         $validated = $this->validate();
+
         $this->config->fill($validated)->save();
 
         $this->dispatch('close-settings-dialog');

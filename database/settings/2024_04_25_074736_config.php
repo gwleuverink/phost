@@ -7,5 +7,6 @@ return new class extends SettingsMigration
     public function up(): void
     {
         $this->migrator->add('config.port', 2525);
+        $this->migrator->add('config.color_scheme', 'system');
     }
 };

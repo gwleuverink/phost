@@ -34,11 +34,44 @@
             x-mask="9999"
         />
 
-        {{-- Danger zone --}}
-        <div>
+        {{-- Color scheme --}}
+        <x-input.fieldset
+            legend="Color scheme"
+            class="space-x-4"
+        >
 
-            <h2 class="-mb-2 mt-6 text-base font-semibold text-neutral-700">Danger zone</h2>
-            <x-support.divider />
+            <x-input.radio
+                wire:model="color_scheme"
+                label="system"
+                value="system"
+            />
+
+            <x-input.radio
+                wire:model="color_scheme"
+                value="light"
+            >
+                <x-slot:label
+                    class="flex"
+                >
+                    <x-heroicon-c-sun class="mr-1 size-4 text-neutral-600" /> light
+                </x-slot:label>
+            </x-input.radio>
+
+            <x-input.radio
+                wire:model="color_scheme"
+                value="dark"
+            >
+                <x-slot:label
+                    class="flex"
+                >
+                    <x-heroicon-c-moon class="mr-1 size-4 text-neutral-600" /> dark
+                </x-slot:label>
+            </x-input.radio>
+
+        </x-input.fieldset>
+
+        {{-- Danger zone --}}
+        <x-input.fieldset legend="Danger zone">
 
             <x-input.button
                 type="button"
@@ -50,7 +83,8 @@
                 <x-heroicon-c-trash class="mr-1 size-3" />
                 Clear inbox
             </x-input.button>
-        </div>
+
+        </x-input.fieldset>
 
         <x-dialog.footer>
             <x-input.button
