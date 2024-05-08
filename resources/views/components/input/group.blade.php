@@ -5,15 +5,15 @@
 
 <label
     :id="$id('input')"
-    class="relative mt-2 flex-grow"
+    class="relative flex-grow mt-2"
 >
 
     @if ($label)
         <label
             :for="$id('input')"
             @class([
-                'absolute inline-block px-1 text-xs font-medium select-none bg-white -top-2 left-2',
-                'text-gray-900' => $errors->missing($model),
+                'absolute inline-block px-1 text-xs font-medium select-none bg-white -top-2 left-2 dark:bg-neutral-950',
+                'text-gray-900 dark:text-neutral-300' => $errors->missing($model),
                 'text-red-700' => $errors->has($model),
             ])
         >

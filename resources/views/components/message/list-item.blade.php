@@ -5,9 +5,9 @@
 <div
     {{ $attributes }}
     @class([
-        'flex items-center block w-full px-4 py-5 transition border-b cursor-default',
-        'shadow-inner bg-neutral-200' => $selected,
-        'hover:bg-neutral-100' => !$selected,
+        'flex items-center block w-full px-4 py-5 transition border-b cursor-default dark:border-neutral-800',
+        'shadow-inner bg-neutral-200 dark:bg-neutral-800 dark:shadow-neutral-800' => $selected,
+        'hover:bg-neutral-100 dark:hover:bg-neutral-700' => !$selected,
     ])
 >
 
@@ -38,23 +38,26 @@
 
         <div class="flex items-center justify-between">
             <h3 @class([
-                'text-lg font-medium text-neutral-600 transition-colors',
-                '!text-neutral-700' => $selected,
+                'text-lg font-medium transition-colors',
+                'text-neutral-600 dark:text-neutral-100' => !$selected,
+                'text-neutral-700 dark:text-white' => $selected,
             ])>
                 {{ $message->parsed->getHeaderValue(Header::FROM) ?? $message->parsed->getHeaderValue(Header::SENDER) }}
             </h3>
 
             <p @class([
-                'text-sm text-neutral-400 transition-colors',
-                '!text-neutral-500' => $selected,
+                'text-sm transition-colors',
+                'text-neutral-400 dark:text-neutral-200' => !$selected,
+                'text-neutral-500 dark:text-neutral-300' => $selected,
             ])>
                 {{ $message->created_at->diffForHumans() }}
             </p>
         </div>
 
         <div @class([
-            'text-base italic text-left text-neutral-400 transition-colors',
-            '!text-neutral-500' => $selected,
+            'text-base italic text-left transition-colors',
+            'text-neutral-400 dark:text-neutral-200' => !$selected,
+            'text-neutral-500 dark:text-neutral-300' => $selected,
         ])>
             {{ $message->parsed->getHeaderValue(Header::SUBJECT) }}
         </div>

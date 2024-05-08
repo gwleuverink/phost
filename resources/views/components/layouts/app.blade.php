@@ -21,7 +21,7 @@
 
 </head>
 
-<body>
+<body class="transform-gpu scroll-smooth antialiased transition-colors">
     <x-support.title-spacer />
 
     {{ $slot }}

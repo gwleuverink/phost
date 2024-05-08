@@ -5,7 +5,7 @@
     'port' => 2525,
 ])
 
-<div class="space-y-2 text-sm">
+<div class="space-y-2 text-sm dark:text-neutral-300">
     @switch($framework)
         {{-- LARAVEL CONFIG --}}
         @case (Framework::Laravel)

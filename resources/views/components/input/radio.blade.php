@@ -43,7 +43,7 @@
                 @class([
                     'font-medium text-xs',
                     $label instanceof \Illuminate\View\ComponentSlot ? $label->attributes->get('class') : null,
-                    'text-gray-900' => $errors->missing($model),
+                    'text-gray-900 dark:text-neutral-300' => $errors->missing($model),
                     'text-red-700' => $errors->has($model),
                 ])
             >

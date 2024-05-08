@@ -47,7 +47,7 @@
                 <x-slot:label
                     class="flex"
                 >
-                    <x-heroicon-c-sun class="mr-1 size-4 text-neutral-600" /> light
+                    <x-heroicon-c-sun class="size-4 text-neutral-600 dark:text-neutral-300" />
                 </x-slot:label>
             </x-input.radio>
 
@@ -58,7 +58,7 @@
                 <x-slot:label
                     class="flex"
                 >
-                    <x-heroicon-c-moon class="mr-1 size-4 text-neutral-600" /> dark
+                    <x-heroicon-c-moon class="size-4 text-neutral-600 dark:text-neutral-300" />
                 </x-slot:label>
             </x-input.radio>
 
