@@ -10,7 +10,7 @@
     x-data="{
         selectedTabIndex: 0,
     }"
-    class="flex w-full flex-col overflow-y-scroll bg-white px-4"
+    class="flex h-full w-full flex-col overflow-y-scroll bg-white px-4"
 >
 
     <div class="relative mb-3 flex h-48 flex-shrink-0 items-center justify-between">
