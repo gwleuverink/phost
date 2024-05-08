@@ -9,18 +9,20 @@
     class="relative flex items-center"
     {{ $attributes->whereStartsWith(['wire:key']) }}
 >
-    <div class="flex h-6 items-center">
+    <div class="flex items-center h-6">
+
         <input
             {{ $attributes->whereStartsWith(['wire', 'x']) }}
-            value="{{ $value }}"
+            value="{{ $value ?? null }}"
             :id="$id('input')"
             type="radio"
+
             @class([
                 'w-4 h-4 text-indigo-600 rounded-full read-only:ring-opacity-50',
-                'border-gray-300 ring-gray-300 focus:ring-indigo-600' => $errors->missing(
-                    $model),
+                'border-gray-300 ring-gray-300 focus:ring-indigo-600' => $errors->missing($model),
                 'border-red-400 ring-red-400 focus:ring-red-500' => $errors->has($model),
             ])
+
             @error($model)
                 aria-invalid="true"
                 aria-description="{{ $message }}"
@@ -28,12 +30,15 @@
         >
     </div>
 
-    <div class="ml-2 select-none text-sm leading-6">
+    <div class="ml-2 text-sm leading-6 select-none">
+
         @if ($label)
             <label
                 :for="$id('input')"
+
                 @class([
                     'font-medium text-xs',
+                    $label instanceof \Illuminate\View\ComponentSlot ? $label->attributes->get('class') : null,
                     'text-gray-900' => $errors->missing($model),
                     'text-red-700' => $errors->has($model),
                 ])
