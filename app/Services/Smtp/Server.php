@@ -10,6 +10,7 @@ use React\EventLoop\LoopInterface;
 use App\Services\Smtp\Enums\Command;
 use React\EventLoop\StreamSelectLoop;
 use React\Socket\ConnectionInterface;
+use Illuminate\Support\Facades\Process;
 
 use function Laravel\Prompts\info;
 use function Laravel\Prompts\note;
@@ -49,6 +50,9 @@ class Server
         app()->bind(self::class, fn () => $mock);
     }
 
+    /**
+     * Start the server
+     */
     public function serve(): void
     {
         $this->socket = new SocketServer(self::HOST . ':' . $this->port, [], $this->loop);
@@ -159,6 +163,22 @@ class Server
         $this->loop->run();
     }
 
+    /**
+     * Configures a callback to be executed whenever a message is fully recceived
+     *
+     * @param callable $callback
+     * @return Server
+     */
+    public function onMessageReceived(callable $callback): self
+    {
+        $this->onMessageReceivedCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * Stops the currently running server
+     */
     public function stop(): void
     {
         if (! $this->socket) {
@@ -169,10 +189,30 @@ class Server
         $this->loop->stop();
     }
 
-    public function onMessageReceived(callable $callback): self
+    /**
+     * Tries to kill the process on the configured Port nr.
+     */
+    public function kill(): void
     {
-        $this->onMessageReceivedCallback = $callback;
+        if (PHP_OS_FAMILY === 'Windows') {
+            $output = Process::run("netstat -ano | findstr :{$this->port}")->output();
 
-        return $this;
+            // Extract the PID from the output
+            $parts = explode(" ", $output[0]);
+            $pid = trim($parts[count($parts) - 1]);
+
+            if ($pid) {
+                Process::run("taskkill /F /PID $pid");
+            }
+        } else {
+            // Unix like
+            $pid = Process::run("lsof -ti :{$this->port}")->output();
+
+            if ($pid) {
+                Process::run("kill {$pid}");
+            }
+        }
+
+        $this->stop();
     }
 }
