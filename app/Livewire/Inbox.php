@@ -94,9 +94,10 @@ class Inbox extends Component
     #[On('native:' . MessageReceived::class)]
     public function messageReceived()
     {
-        // TODO: Implement NativePHP events
+        // TODO: Implement Websocket events - not supported in L11
         // https://nativephp.com/docs/1/digging-deeper/broadcasting
-        // Laravel websockets doesn't support L11. Can we use Reverb instead? https://laravel.com/docs/11.x/reverb
+        // Can we use Reverb instead? https://laravel.com/docs/11.x/reverb
+        // See issue: https://github.com/NativePHP/laravel/issues/295
 
         dd('Received new message');
     }
