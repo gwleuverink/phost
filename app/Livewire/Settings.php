@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Enums\Framework;
 use App\Services\Smtp\Server;
 use App\Livewire\Concerns\Config;
+use Illuminate\Support\Js;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 
@@ -22,7 +23,7 @@ class Settings extends Component
     #[Validate('required|numeric|min_digits:4|starts_with:25')]
     public int $port;
 
-    #[Validate('required|in:system,light,dark')]
+    #[Validate('required|in:light,dark')]
     public string $theme;
 
     public function mount()
@@ -81,9 +82,14 @@ class Settings extends Component
     public function activateTheme()
     {
         match ($this->theme) {
-            'system' => $this->js("document.documentElement.classList.remove('light', 'dark')"),
-            'dark' => $this->js("document.documentElement.classList.remove('light'); document.documentElement.classList.add('dark')"),
-            'light' => $this->js("document.documentElement.classList.remove('dark'); document.documentElement.classList.add('light')"),
+            'dark' => $this->js(<<< JS
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark')
+            JS),
+            'light' => $this->js(<<< JS
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light')
+            JS),
         };
     }
 }

@@ -2,7 +2,7 @@
 
 <div class="space-y-2">
 
-    <div class="flex flex-row space-x-4 px-2">
+    <div class="flex flex-row px-2 space-x-4">
         @foreach (Framework::cases() as $framework)
             <x-input.radio
                 wire:model.live="framework"
@@ -39,12 +39,6 @@
             legend="Color scheme"
             class="space-x-4"
         >
-
-            <x-input.radio
-                wire:model.live="theme"
-                label="system"
-                value="system"
-            />
 
             <x-input.radio
                 wire:model.live="theme"
