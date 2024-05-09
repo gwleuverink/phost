@@ -6,11 +6,11 @@
 .dark ::-webkit-scrollbar {
     /* background-color: rgb(10 10 10); */
     outline: -1px solid rgb(10 10 10);
-    @apply bg-neutral-950;
+    @apply bg-neutral-950 transition-colors;
 }
 
 .dark::-webkit-scrollbar-thumb,
 .dark ::-webkit-scrollbar-thumb {
     background: rgb(212 212 212);
-    @apply rounded-2xl mx-1 border-[3px] border-solid border-neutral-950;
+    @apply rounded-2xl mx-1 border-[3px] border-solid border-neutral-950 transition-colors;
 }

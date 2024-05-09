@@ -10,7 +10,7 @@
     x-data="{
         selectedTabIndex: 0,
     }"
-    class="flex h-full w-full flex-col overflow-y-scroll bg-white px-4 dark:bg-neutral-950"
+    class="flex h-full w-full flex-col overflow-y-scroll bg-white px-4 transition-colors dark:bg-neutral-950"
 >
 
     <div class="relative mb-3 flex h-48 flex-shrink-0 items-center justify-between">
@@ -80,6 +80,7 @@
                 <x-heroicon-o-arrow-right-circle class="size-6" />
             </button>
 
+            {{-- TODO: Replace with System::print() instead? --}}
             <button
                 x-on:click="Helpers.print(@js($message->parsed->getHtmlContent() ?? $message->parsed->getTextContent()))"
                 class="cursor-default transition-colors hover:text-neutral-500"

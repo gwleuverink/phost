@@ -10,15 +10,15 @@
         <div
             x-dialog:overlay
             x-transition:enter.opacity
-            class="fixed inset-0 bg-black/25 backdrop-blur dark:bg-neutral-100/15"
+            class="fixed inset-0 bg-black/25 backdrop-blur transition-colors dark:bg-neutral-100/15"
         ></div>
 
         <!-- Panel -->
-        <div class="relative flex items-end justify-center min-h-full p-0 sm:items-center sm:p-4">
+        <div class="relative flex min-h-full items-end justify-center p-0 sm:items-center sm:p-4">
             <div
                 x-dialog:panel
                 x-transition.in.out
-                class="relative w-full max-w-3xl overflow-hidden bg-white shadow-lg rounded-t-xl sm:rounded-b-xl dark:bg-neutral-950"
+                class="relative w-full max-w-3xl overflow-hidden rounded-t-xl bg-white shadow-lg transition-colors sm:rounded-b-xl dark:bg-neutral-950"
             >
                 <!-- Mobile: Top "grab" handle... -->
                 <div
@@ -35,14 +35,14 @@
                 </div>
 
                 <!-- Close Button -->
-                <div class="absolute top-0 right-0 pt-4 pr-4">
+                <div class="absolute right-0 top-0 pr-4 pt-4">
                     <button
                         type="button"
                         x-on:click="$dialog.close()"
-                        class="p-1 text-gray-600 rounded-lg cursor-default bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 dark:bg-neutral-800 dark:text-neutral-100"
+                        class="cursor-default rounded-lg bg-gray-50 p-1 text-gray-600 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2 dark:bg-neutral-800 dark:text-neutral-100"
                     >
                         <span class="sr-only">Close modal</span>
-                        <x-heroicon-m-x-mark class="w-5 h-5" />
+                        <x-heroicon-m-x-mark class="h-5 w-5" />
                     </button>
                 </div>
 
