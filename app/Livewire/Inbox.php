@@ -9,6 +9,7 @@ use Livewire\Attributes\Url;
 use App\Services\Smtp\Server;
 use Livewire\Attributes\Title;
 use App\Events\MessageReceived;
+use Native\Laravel\Facades\App;
 use App\Livewire\Concerns\Config;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Collection;
@@ -33,6 +34,7 @@ class Inbox extends Component
     public function mount($messageId = null)
     {
         $this->restartServer();
+        $this->updateBadgeCount();
 
         if ($messageId) {
             $this->selectMessage($messageId);
@@ -47,8 +49,9 @@ class Inbox extends Component
         $this->selectedMessageId = $id;
 
         $this->message?->markRead();
-    }
 
+        $this->updateBadgeCount();
+    }
 
     public function restartServer(?int $port = null)
     {
@@ -99,6 +102,16 @@ class Inbox extends Component
         // Can we use Reverb instead? https://laravel.com/docs/11.x/reverb
         // See issue: https://github.com/NativePHP/laravel/issues/295
 
+        $this->updateBadgeCount();
+
         dd('Received new message');
+    }
+
+    //---------------------------------------------------------------
+    // System
+    //---------------------------------------------------------------
+    protected function updateBadgeCount()
+    {
+        App::badgeCount(Message::unread()->count());
     }
 }

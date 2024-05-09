@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Number;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use ZBateson\MailMimeParser\Message as ParsedMessage;
 use ZBateson\MailMimeParser\IMessage as ParsedMessageContract;
@@ -29,6 +29,14 @@ class Message extends Model
         return self::create([
             'content' => $content,
         ]);
+    }
+
+    //---------------------------------------------------------------
+    // Scope
+    //---------------------------------------------------------------
+    public function scopeUnread(Builder $query): void
+    {
+        $query->whereNull('read_at');
     }
 
     //---------------------------------------------------------------
