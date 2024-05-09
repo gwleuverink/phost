@@ -54,6 +54,7 @@
             "@php artisan package:discover --ansi"
         ],
         "post-install-cmd": [
+            "cp ./storage/app/public/icon.png ./vendor/nativephp/electron/resources/js/build/icon.png",
             "cp ./storage/app/public/icon.png ./vendor/nativephp/electron/resources/js/resources/icon.png"
         ],
         "post-update-cmd": [

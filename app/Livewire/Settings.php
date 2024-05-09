@@ -7,7 +7,6 @@ use Livewire\Component;
 use App\Enums\Framework;
 use App\Services\Smtp\Server;
 use App\Livewire\Concerns\Config;
-use Illuminate\Support\Js;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 
@@ -58,7 +57,6 @@ class Settings extends Component
         return $this->redirectRoute('inbox', navigate: true);
     }
 
-
     //---------------------------------------------------------------
     // Hooks
     //---------------------------------------------------------------
@@ -82,14 +80,15 @@ class Settings extends Component
     public function activateTheme()
     {
         match ($this->theme) {
-            'dark' => $this->js(<<< JS
+            'dark' => $this->js(<<< 'JS'
                 document.documentElement.classList.remove('light');
                 document.documentElement.classList.add('dark')
             JS),
-            'light' => $this->js(<<< JS
+            'light' => $this->js(<<< 'JS'
                 document.documentElement.classList.remove('dark');
                 document.documentElement.classList.add('light')
             JS),
+            default => fn () => null
         };
     }
 }

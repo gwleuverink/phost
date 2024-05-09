@@ -14,6 +14,7 @@ class NativeAppServiceProvider implements ProvidesPhpIni
     public function boot(): void
     {
         Window::open()
+            ->title('phost')
             ->titleBarHidden()
             ->hideMenu()
             ->width(1200)
