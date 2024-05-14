@@ -29,6 +29,8 @@ class Inbox extends Component
     #[Url]
     public string $search = '';
 
+    public bool $online = false;
+
     public ?int $selectedMessageId = null;
 
     public function mount($messageId = null)
@@ -53,17 +55,16 @@ class Inbox extends Component
         $this->updateBadgeCount();
     }
 
-    public function restartServer(?int $port = null)
+    public function heartbeat()
     {
-        $port = $port ?? $this->config->port;
+        $online = Server::new()->ping();
 
-        // Kill stray processes on configured port
-        Server::new($port)->kill();
+        // Skip rerender whe the online status didn't change
+        if ($this->online === $online) {
+            $this->skipRender();
+        }
 
-        // NativePHP's supervisor seems to be delayed slightly.
-        // We'll invoke the serve command immediately and
-        // use the scheduler as a restart mechanism.
-        Artisan::queue('smtp:serve');
+        $this->online = $online;
     }
 
     //---------------------------------------------------------------
@@ -94,17 +95,30 @@ class Inbox extends Component
     //---------------------------------------------------------------
     // Listeners
     //---------------------------------------------------------------
+    #[On('restart-server')]
+    public function restartServer(?int $port = null)
+    {
+        $this->online = false;
+
+        $port = $port ?? $this->config->port;
+
+        // Kill stray processes on configured port
+        Server::new($port)->kill();
+
+        // NativePHP's supervisor seems to be delayed slightly.
+        // We'll invoke the serve command immediately and
+        // use the scheduler as a restart mechanism.
+        Artisan::queue('smtp:serve');
+    }
+
+    /**
+     * This Event is passed to Livewire via IPC using a custom
+     * listener inside this component x-init attribute
+     */
     #[On('native:' . MessageReceived::class)]
     public function messageReceived()
     {
-        // TODO: Implement Websocket events - not supported in L11
-        // https://nativephp.com/docs/1/digging-deeper/broadcasting
-        // Can we use Reverb instead? https://laravel.com/docs/11.x/reverb
-        // See issue: https://github.com/NativePHP/laravel/issues/295
-
         $this->updateBadgeCount();
-
-        dd('Received new message');
     }
 
     //---------------------------------------------------------------

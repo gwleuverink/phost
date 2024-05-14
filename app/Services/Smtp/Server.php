@@ -165,9 +165,6 @@ class Server
 
     /**
      * Configures a callback to be executed whenever a message is fully recceived
-     *
-     * @param callable $callback
-     * @return Server
      */
     public function onMessageReceived(callable $callback): self
     {
@@ -198,11 +195,11 @@ class Server
             $output = Process::run("netstat -ano | findstr :{$this->port}")->output();
 
             // Extract the PID from the output
-            $parts = explode(" ", $output[0]);
+            $parts = explode(' ', $output[0]);
             $pid = trim($parts[count($parts) - 1]);
 
             if ($pid) {
-                Process::run("taskkill /F /PID $pid");
+                Process::run("taskkill /F /PID {$pid}");
             }
         } else {
             // Unix like
@@ -214,5 +211,26 @@ class Server
         }
 
         $this->stop();
+    }
+
+    /**
+     * Check if a process is alive on the configured port
+     */
+    public function ping(): bool
+    {
+        if (PHP_OS_FAMILY === 'Windows') {
+            $output = Process::run("netstat -ano | findstr :{$this->port}")->output();
+
+            // Extract the PID from the output
+            $parts = explode(' ', $output[0]);
+            $pid = trim($parts[count($parts) - 1]);
+
+            return (bool) $pid;
+        }
+
+        // Unix like
+        $pid = Process::run("lsof -ti :{$this->port}")->output();
+
+        return (bool) $pid;
     }
 }
