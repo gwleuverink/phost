@@ -3,7 +3,7 @@
     wire:poll.{{ $online ? '15s' : '1s' }}="heartbeat"
     {{-- Reload UI when we receive a new message --}}
     x-init="document.addEventListener('livewire:navigated', () => {
-        Helpers.renderer.on('log', (event, { level, message, context }) => {
+        Helpers.ipcRenderer.on('log', (event, { level, message, context }) => {
             if (message.startsWith('Broadcasting [App\\Events\\MessageReceived] on channels [nativephp]')) {
                 window.Livewire.dispatch('native:App\\Events\\MessageReceived')
             }

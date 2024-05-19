@@ -1,7 +1,7 @@
 import print from './helpers/print'
-const renderer = require('electron').ipcRenderer
+const ipcRenderer = require('electron').ipcRenderer
 
 export default {
     print,
-    renderer
+    ipcRenderer
 }
