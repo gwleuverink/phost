@@ -45,6 +45,8 @@ class Server
         $mock = Mockery::mock(self::class, fn ($mock) => $mock
             ->makePartial()
             ->shouldReceive('serve')
+            ->shouldReceive('ping')
+            ->shouldReceive('kill')
         );
 
         app()->bind(self::class, fn () => $mock);

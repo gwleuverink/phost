@@ -126,6 +126,12 @@ class Inbox extends Component
     //---------------------------------------------------------------
     protected function updateBadgeCount()
     {
+        // Better to  mock this method instead, but since this should be handled
+        // by NativePHP (maybe in future) just keep it simple.
+        if (app()->runningUnitTests()) {
+            return;
+        }
+
         App::badgeCount(Message::unread()->count());
     }
 }
