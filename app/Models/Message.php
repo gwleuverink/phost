@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use ZBateson\MailMimeParser\Message as ParsedMessage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use ZBateson\MailMimeParser\IMessage as ParsedMessageContract;
 
 /**
@@ -13,6 +14,8 @@ use ZBateson\MailMimeParser\IMessage as ParsedMessageContract;
  */
 class Message extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'bookmarked',
         'content',

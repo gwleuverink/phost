@@ -108,6 +108,7 @@ class Inbox extends Component
         // NativePHP's supervisor seems to be delayed slightly.
         // We'll invoke the serve command immediately and
         // use the scheduler as a restart mechanism.
+        // NOTE: Explore pcntl fork approach.
         Artisan::queue('smtp:serve');
     }
 
