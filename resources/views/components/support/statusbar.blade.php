@@ -7,7 +7,7 @@
 
     {{-- Online status --}}
     <div class="flex items-center space-x-2">
-        <span class="relative flex w-3 h-3">
+        <span class="relative flex h-3 w-3">
             <span @class([
                 'absolute inline-flex w-full h-full rounded-full opacity-75 transition-all',
                 'bg-rose-400 animate-ping' => !$online,
