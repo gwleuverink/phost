@@ -4,6 +4,7 @@ name: codestyle
 # Checkout Duster's documentation for a workaround
 
 on:
+    workflow_dispatch:
     pull_request:
         branches: [development, dev, acceptance, staging, main, master]
 
