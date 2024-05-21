@@ -3,13 +3,10 @@
 namespace App\Console\Commands;
 
 use Throwable;
-use App\Models\Message;
 use App\Settings\Config;
 use App\Services\Smtp\Server;
 use App\Events\MessageReceived;
 use Illuminate\Console\Command;
-use Native\Laravel\Facades\Notification;
-use ZBateson\MailMimeParser\Header\HeaderConsts;
 
 /**
  * This Command spawns a non-blocking SMTP server
@@ -26,8 +23,6 @@ class HandleIncomingMessages extends Command
 
     protected $description = 'Starts SMTP server & handles incoming messages';
 
-    const NOTIFICATION_TITLE = "You've got Phost!";
-
     public function handle()
     {
         $port = $this->config()->port;
@@ -37,16 +32,9 @@ class HandleIncomingMessages extends Command
             logger("SUPERVISOR | Keeping SMTP server alive on :{$port}");
 
             Server::new($port)
-                ->onMessageReceived(function ($content) {
-
-                    $message = Message::fromContent($content);
-                    MessageReceived::dispatch($message);
-
-                    Notification::title(self::NOTIFICATION_TITLE)
-                        ->message($message->parsed->getHeaderValue(HeaderConsts::SUBJECT))
-                        ->show();
-
-                })->serve();
+                ->onMessageReceived(
+                    fn ($content) => MessageReceived::dispatch($content)
+                )->serve();
 
         } catch (Throwable $th) {
 
