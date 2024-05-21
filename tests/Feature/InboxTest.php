@@ -6,10 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-it('returns a successful response', function () {
-    $response = $this->get(route('inbox'));
-    $response->assertStatus(200);
-});
+it('returns a successful response')
+    ->livewire(Inbox::class)
+    ->assertOk();
 
 it('listens to server restart event')
     ->livewire(Inbox::class)
@@ -98,8 +97,6 @@ it('deselects message when deleted', function () {
 it('can select next message', function () {
     $messageOne = Message::factory()->create();
     $messageTwo = Message::factory()->create();
-
-    dump($messageOne->id, $messageTwo->id);
 
     $this->livewire(Inbox::class, [$messageOne->id])
         ->assertSet('selectedMessageId', $messageOne->id)
