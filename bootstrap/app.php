@@ -15,10 +15,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withSchedule(function (Schedule $schedule) {
 
         // Make sure the SMTP server is always up
+        // This is here as a fallback for whenever the
+        // process spawned by the Inbox component ever crashes.
         $schedule->command('smtp:serve')
             // ->withoutOverlapping() // Won't work when enabled
             // ->runInBackground() // Server won't stop when app closes when enabled (note: in final build the process stays alive regardless?)
-            ->everySecond();
+            ->everyFiveSeconds();
     })
 
     ->withMiddleware(function (Middleware $middleware) {

@@ -1,6 +1,8 @@
 <main
-    {{-- Poll for online status --}}
-    wire:poll.{{ $online ? '15s' : '1s' }}="heartbeat"
+    {{-- Poll for heartbeat --}}
+    wire:poll.5s="heartbeat"
+    {{-- Start SMTP server --}}
+    wire:init="$dispatch('refresh-server')"
     {{-- Reload UI when we receive a new message --}}
     x-init="document.addEventListener('livewire:navigated', () => {
         Helpers.ipcRenderer.on('log', (event, { level, message, context }) => {

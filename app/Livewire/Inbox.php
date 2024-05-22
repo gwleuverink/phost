@@ -35,7 +35,6 @@ class Inbox extends Component
 
     public function mount($messageId = null)
     {
-        $this->restartServer();
         $this->updateBadgeCount();
 
         if ($messageId) {
@@ -108,8 +107,9 @@ class Inbox extends Component
         // NativePHP's supervisor seems to be delayed slightly.
         // We'll invoke the serve command immediately and
         // use the scheduler as a restart mechanism.
-        // NOTE: Explore pcntl fork approach.
-        Artisan::queue('smtp:serve');
+        dispatch(function () {
+            Artisan::call('smtp:serve');
+        })->afterResponse();
     }
 
     /**

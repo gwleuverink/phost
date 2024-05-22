@@ -29,6 +29,7 @@ class NativeAppServiceProvider implements ProvidesPhpIni
     public function phpIni(): array
     {
         return [
+            'max_execution_time' => -1,
         ];
     }
 }
