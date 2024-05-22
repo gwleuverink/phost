@@ -1,0 +1,46 @@
+name: Build and publish
+
+on:
+    workflow_dispatch:
+    release:
+        types: [published]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.2"
+
+            - name: Cache Composer dependencies
+              uses: actions/cache@v3
+              with:
+                  path: /tmp/composer-cache
+                  key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+            - uses: php-actions/composer@v6
+              with:
+                  php_version: "8.2"
+                  php_extensions: pcntl
+                  version: 2.x
+
+            - name: Copy .env
+              run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+            - name: Generate key
+              run: php artisan key:generate
+
+            - name: Build & publish!
+              env:
+                  NATIVEPHP_UPDATER_ENABLED: false
+                  NATIVEPHP_UPDATER_PROVIDER: github
+                  GITHUB_PRIVATE: true # update after making public
+                  GITHUB_REPO: gwleuverink/phost
+                  GITHUB_OWNER: gwleuverink
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+              run: php artisan native:publish mac
