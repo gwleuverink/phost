@@ -3,7 +3,7 @@
 ])
 
 {{-- Status bar --}}
-<div class="sticky bottom-0 left-0 right-0 select-none bg-inherit px-4 py-1.5 shadow-inner dark:shadow-[#0E0E0E]">
+<div class="sticky bottom-0 left-0 right-0 select-none bg-inherit px-4 pb-1.5 pt-2 shadow-inner dark:shadow-[#0E0E0E]">
 
     {{-- Online status --}}
     <div class="flex items-center space-x-2">
