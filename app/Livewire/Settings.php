@@ -47,7 +47,6 @@ class Settings extends Component
         // Stop the server & restart picked up by the scheduler
         if ($this->port !== $oldPort) {
             Server::new($oldPort)->kill();
-            $this->dispatch('restart-server')->to(Inbox::class);
         }
     }
 
