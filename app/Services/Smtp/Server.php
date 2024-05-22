@@ -12,10 +12,6 @@ use React\EventLoop\StreamSelectLoop;
 use React\Socket\ConnectionInterface;
 use Illuminate\Support\Facades\Process;
 
-use function Laravel\Prompts\info;
-use function Laravel\Prompts\note;
-use function Laravel\Prompts\warning;
-
 class Server
 {
     protected const HOST = '127.0.0.1';
@@ -59,14 +55,14 @@ class Server
     {
         $this->socket = new SocketServer(self::HOST . ':' . $this->port, [], $this->loop);
 
-        info("Started SMTP server on: {$this->socket->getAddress()}");
+        logger("SMTP server | Started SMTP server on: {$this->socket->getAddress()}");
 
         $this->socket->on('connection', function (ConnectionInterface $connection) {
 
             $content = '';
             $transferring = false;
 
-            note(Reply::Ready->value . ' - opened SMTP connection on: ' . $connection->getLocalAddress());
+            logger('SMTP server | ' . Reply::Ready->value . ' - opened SMTP connection on: ' . $connection->getLocalAddress());
             $connection->write(Reply::Ready->value . " Ok!\r\n");
 
             $connection->on('data', function ($data) use ($connection, &$content, &$transferring) {
@@ -78,61 +74,68 @@ class Server
                         $line = str($line)->trim();
 
                         // -------------------------------------------------------------------
+                        // Abort signals
+                        // -------------------------------------------------------------------
+                        if ($line->startsWith(Command::RESET->value)) {
+                            logger('SMTP server | ' . Reply::Okay->value . ' - received RSET');
+
+                            $content = '';
+                            $transferring = false;
+                            $connection->write(Reply::Okay->value . "SMTP transfer reset!\r\n");
+
+                            return false;
+                        }
+
+                        if ($line->startsWith(Command::QUIT->value)) {
+                            logger('SMTP server | ' . Reply::Goodbye->value . ' - received QUIT');
+
+                            $transferring = false;
+                            $connection->end(Reply::Goodbye->value . " Goodbye!\r\n");
+
+                            return false;
+                        }
+
+                        // -------------------------------------------------------------------
                         // Message transfer
                         // -------------------------------------------------------------------
                         if ($transferring) {
 
                             if ($line->toString() === '.') {
-                                note(Reply::Okay->value . ' - message received!');
-                                $connection->write(Reply::Okay->value . " Ok!\r\n");
+                                logger('SMTP server | ' . Reply::Okay->value . ' - message received!');
 
                                 call_user_func($this->onMessageReceivedCallback, $content);
+
+                                $connection->write(Reply::Okay->value . " Ok!\r\n");
                                 $transferring = false;
 
                                 return false;
-                            }
-
-                            if ($line->startsWith(Command::RESET->value)) {
-                                $content = '';
-                                $transferring = false;
-                                $connection->write(Reply::Okay->value . "SMTP transfer reset!\r\n");
-
-                                return false;
-                            }
-
-                            if ($line->startsWith(Command::QUIT->value)) {
-                                $transferring = false;
-                                $connection->write(Reply::Goodbye->value . "Received QUIT message. Closing connection.\r\n");
-
-                                $connection->close();
                             }
 
                             // All ok. Append message content
                             $content .= $line->append(PHP_EOL)->toString();
 
                             return true;
-
                         }
 
                         // -------------------------------------------------------------------
                         // Handshake ($transferring = false)
                         // -------------------------------------------------------------------
                         if ($line->startsWith(Command::EHLO->value)) {
-                            note(Reply::Okay->value . ' - received ' . $line->toString());
+                            logger('SMTP server | ' . Reply::Okay->value . ' - received ' . $line->toString());
                             $connection->write(Reply::Okay->value . " Ok!\r\n");
 
                             return false;
                         }
 
                         if ($line->startsWith(Command::HELO->value)) {
-                            note(Reply::Okay->value . ' - received ' . $line->toString());
+                            logger('SMTP server | ' . Reply::Okay->value . ' - received ' . $line->toString());
                             $connection->write(Reply::Okay->value . " Ok!\r\n");
 
                             return false;
                         }
 
                         if ($line->startsWith(Command::FROM_HEADER->value)) {
-                            note(Reply::Okay->value . ' - received MAIL FROM');
+                            logger('SMTP server | ' . Reply::Okay->value . ' - received MAIL FROM');
 
                             $connection->write(Reply::Okay->value . " Ok!\r\n");
 
@@ -140,7 +143,7 @@ class Server
                         }
 
                         if ($line->startsWith(Command::RECIPIENT_HEADER->value)) {
-                            note(Reply::Okay->value . ' - received RCPT TO');
+                            logger('SMTP server | ' . Reply::Okay->value . ' - received RCPT TO');
 
                             $connection->write(Reply::Okay->value . " Ok!\r\n");
 
@@ -148,7 +151,7 @@ class Server
                         }
 
                         if ($line->toString() === Command::DATA->value) {
-                            note(Reply::StartTransfer->value . ' - starting message transfer');
+                            logger('SMTP server | ' . Reply::StartTransfer->value . ' - starting message transfer');
                             $connection->write(Reply::StartTransfer->value . " Start transfer\r\n");
 
                             $transferring = true;
@@ -156,15 +159,8 @@ class Server
                             return false;
                         }
 
-                        if ($line->startsWith(Command::QUIT->value)) {
-                            note(Reply::Goodbye->value . ' - closed SMTP connection on: ' . $connection->getLocalAddress());
-                            $connection->end(Reply::Goodbye->value . " Goodbye!\r\n");
-
-                            return false;
-                        }
-
                         // TODO: Refactor to match & handle default 500 something reply
-                        warning(Reply::CommandNotImplemented->value . ' - ' . $line->toString());
+                        logger('SMTP server | Not implemented - ' . $line->toString());
                         $connection->write(Reply::CommandNotImplemented->value . " Not implemented\r\n"); // Okay
                         $connection->close();
 
@@ -173,7 +169,7 @@ class Server
             });
 
             $connection->on('close', function () use ($connection) {
-                note("Closed SMTP connection on: {$connection->getLocalAddress()}");
+                logger('SMTP server | ' . "Closed SMTP connection on: {$connection->getLocalAddress()}");
             });
 
         });
