@@ -92,6 +92,22 @@ class Server
                                 return false;
                             }
 
+                            if ($line->startsWith(Command::RESET->value)) {
+                                $content = '';
+                                $transferring = false;
+                                $connection->write(Reply::Okay->value . "SMTP transfer reset!\r\n");
+
+                                return false;
+                            }
+
+                            if ($line->startsWith(Command::QUIT->value)) {
+                                $transferring = false;
+                                $connection->write(Reply::Goodbye->value . "Received QUIT message. Closing connection.\r\n");
+
+                                $connection->close();
+                            }
+
+                            // All ok. Append message content
                             $content .= $line->append(PHP_EOL)->toString();
 
                             return true;
