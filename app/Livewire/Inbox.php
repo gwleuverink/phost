@@ -56,7 +56,7 @@ class Inbox extends Component
 
     public function heartbeat()
     {
-        $online = Server::new()->ping();
+        $online = Server::new($this->config->port)->ping();
 
         // Skip rerender whe the online status didn't change
         if ($this->online === $online) {
