@@ -12,6 +12,13 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "npm"
+
+            - run: npm ci
+
             - uses: shivammathur/setup-php@v2
               with:
                   php-version: "8.2"
@@ -34,7 +41,10 @@ jobs:
             - name: Generate key
               run: php artisan key:generate
 
-            - name: Build & publish!
+            - name: Build assets
+              run: npm run build
+
+            - name: Build app & publish!
               env:
                   NATIVEPHP_UPDATER_ENABLED: false
                   NATIVEPHP_UPDATER_PROVIDER: github
@@ -42,5 +52,4 @@ jobs:
                   GITHUB_REPO: gwleuverink/phost
                   GITHUB_OWNER: gwleuverink
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
               run: php artisan native:publish mac
