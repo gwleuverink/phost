@@ -12,7 +12,7 @@
 Phost is an email debugging tool and local SMTP server, developed primarily in PHP. It leverages a powerful stack of modern technologies:
 
 -   [**Laravel/Livewire**](https://livewire.laravel.com/) -> For dynamic, reactive interface
--   [**NativePHP**](https://nativephp.com/) -> Electron wrapper for native app feel
+-   [**NativePHP**](https://nativephp.com/) -> Electron wrapper for PHP built apps
 -   [**ReactPHP**](https://reactphp.org/) -> Powering the SMTP server component
 
 While Phost may not yet match the feature set of some paid alternatives, it serves as an exploration of the capabilities of a native PHP stack.
