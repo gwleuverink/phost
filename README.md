@@ -44,4 +44,4 @@ This process saves the app as an exception to your security settings. Thereafter
 
 ### Security Considerations
 
-We understand if you have reservations about running unverified applications. This project is currently in an experimental phase, and we have not yet invested in an Apple Developer Account for code-signing. Future notarization depends on community support, potentially through GitHub Sponsors.
+We understand if you have reservations about running unverified applications. This project is currently in an experimental phase, and we have not yet invested in an Apple Developer Account for code-signing. Future notarization depends on community support through [GitHub Sponsors](https://github.com/sponsors/gwleuverink). Your support is greatly appreciated! 🙏
