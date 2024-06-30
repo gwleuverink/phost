@@ -20,13 +20,15 @@
 
     <section class="relative flex h-full w-4/12 min-w-80 flex-col overflow-y-scroll bg-gray-50 pt-8 transition-colors dark:bg-neutral-900">
 
-        <label class="px-3">
-            <input
-                placeholder="Search..."
-                wire:model.live="search"
-                class="w-full rounded-lg border-none bg-gray-100 p-4 transition-all duration-200 focus:outline-none focus:ring-2 dark:bg-neutral-800 dark:text-neutral-300 dark:placeholder:text-neutral-400"
-            >
-        </label>
+        @if ($this->inbox && !$search)
+            <label class="px-3">
+                <input
+                    placeholder="Search..."
+                    wire:model.live="search"
+                    class="w-full rounded-lg border-none bg-gray-100 p-4 transition-all duration-200 focus:outline-none focus:ring-2 dark:bg-neutral-800 dark:text-neutral-300 dark:placeholder:text-neutral-400"
+                >
+            </label>
+        @endif
 
         <ul class="mt-6 flex-grow">
 
