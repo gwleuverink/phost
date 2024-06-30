@@ -17,6 +17,10 @@ Phost is an email debugging tool and local SMTP server, developed primarily in P
 
 While Phost may not yet match the feature set (or stability) of some paid alternatives, it serves as an exploration of the capabilities of a native PHP stack.
 
+<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/filled-inbox.png?raw=true" alt="Filled inbox screenshot" />
+<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/settings.png?raw=true" alt="User preferences screenshot" />
+<!-- <img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/inbox-zero.png?raw=true" alt="Inbox zero! screenshot" /> -->
+
 ## Features
 
 -   Local SMTP server for intercepting and viewing emails
@@ -41,12 +45,6 @@ Please note that the current build is neither signed nor notarized. To run the a
 4. Click 'Open' in the dialog box that appears
 
 This process saves the app as an exception to your security settings. Thereafter, you can launch it by double-clicking, like any other registered app.
-
-### Screenshots
-
-<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/filled-inbox.png?raw=true" alt="Filled inbox screenshot" />
-<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/settings.png?raw=true" alt="User preferences screenshot" />
-<!-- <img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/inbox-zero.png?raw=true" alt="Inbox zero! screenshot" /> -->
 
 ### Security Considerations
 
