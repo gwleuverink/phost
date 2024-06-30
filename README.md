@@ -27,6 +27,7 @@ While Phost may not yet match the feature set (or stability) of some paid altern
 -   User-friendly interface for email inspection
 -   Debug email source, both HTML, text & headers
 -   Bookmark emails for quick access
+-   Light & dark color schemes
 -   Print emails as PDF
 
 ## Getting started
