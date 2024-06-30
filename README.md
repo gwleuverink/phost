@@ -42,6 +42,12 @@ Please note that the current build is neither signed nor notarized. To run the a
 
 This process saves the app as an exception to your security settings. Thereafter, you can launch it by double-clicking, like any other registered app.
 
+### Screenshots
+
+<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/full-inbox.png?raw=true" alt="Filled inbox screenshot" />
+<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/preferences.png?raw=true" alt="User preferences screenshot" />
+<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/inbox-zero.png?raw=true" alt="Inbox zero! screenshot" />
+
 ### Security Considerations
 
 I understand if you have reservations about running unverified applications. This project is currently in an experimental phase, and I have not yet invested in an Apple Developer Account for code-signing. Future notarization depends on community support through [GitHub Sponsors](https://github.com/sponsors/gwleuverink). Your support is greatly appreciated! 🙏
