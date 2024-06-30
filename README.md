@@ -44,9 +44,9 @@ This process saves the app as an exception to your security settings. Thereafter
 
 ### Screenshots
 
-<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/full-inbox.png?raw=true" alt="Filled inbox screenshot" />
-<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/preferences.png?raw=true" alt="User preferences screenshot" />
-<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/inbox-zero.png?raw=true" alt="Inbox zero! screenshot" />
+<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/filled-inbox.png?raw=true" alt="Filled inbox screenshot" />
+<img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/settings.png?raw=true" alt="User preferences screenshot" />
+<!-- <img src="https://github.com/gwleuverink/phost/blob/main/storage/app/public/screenshots/inbox-zero.png?raw=true" alt="Inbox zero! screenshot" /> -->
 
 ### Security Considerations
 
