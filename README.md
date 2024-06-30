@@ -27,7 +27,7 @@ While Phost may not yet match the feature set (or stability) of some paid altern
 
 ## Getting started
 
-At present, only a macOS build is available. Windows and Linux builds are pending due to lack of testing environments. We welcome contributions from users with access to these platforms.
+At present, only a macOS build is available. Windows and Linux builds are pending due to lack of testing environments. Contributions from users with access to these platforms are more than welcome.
 
 [Download the latest release here](https://github.com/gwleuverink/phost/releases.)
 
@@ -44,4 +44,4 @@ This process saves the app as an exception to your security settings. Thereafter
 
 ### Security Considerations
 
-We understand if you have reservations about running unverified applications. This project is currently in an experimental phase, and we have not yet invested in an Apple Developer Account for code-signing. Future notarization depends on community support through [GitHub Sponsors](https://github.com/sponsors/gwleuverink). Your support is greatly appreciated! 🙏
+I understand if you have reservations about running unverified applications. This project is currently in an experimental phase, and I have not yet invested in an Apple Developer Account for code-signing. Future notarization depends on community support through [GitHub Sponsors](https://github.com/sponsors/gwleuverink). Your support is greatly appreciated! 🙏
