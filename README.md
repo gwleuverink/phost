@@ -7,6 +7,11 @@
 <a href="https://github.com/gwleuverink/phost/actions/workflows/codestyle.yml"><img src="https://github.com/gwleuverink/phost/actions/workflows/codestyle.yml/badge.svg" alt="Codestyle"></a>
 </p>
 
+> ⚠️ **Phost is not released yet**
+>
+> There are a couple of things to work out with the production build.
+> The dev build is fully functional. If you'd like to get a sneak peek you can clone the repo and run it with `php artisan native:serve`. Please refer to the [NativePHP docs](https://nativephp.com/docs/1/getting-started/introduction) and check back here soon!
+
 ## About
 
 Phost is an email debugging tool and local SMTP server, developed primarily in PHP. It leverages a powerful stack of modern technologies:
