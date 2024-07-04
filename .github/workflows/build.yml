@@ -2,8 +2,8 @@ name: Build and publish
 
 on:
     workflow_dispatch:
-    # release:
-    #     types: [published]
+    release:
+        types: [published]
 
 jobs:
     build:
@@ -48,7 +48,7 @@ jobs:
               env:
                   NATIVEPHP_UPDATER_ENABLED: false
                   NATIVEPHP_UPDATER_PROVIDER: github
-                  GITHUB_PRIVATE: true # update after making public
+                  GITHUB_PRIVATE: false # update after making public
                   GITHUB_REPO: gwleuverink/phost
                   GITHUB_OWNER: gwleuverink
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
