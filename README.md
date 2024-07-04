@@ -39,7 +39,9 @@ While Phost may not yet match the feature set (or stability) of some paid altern
 
 At present, only a macOS build is available. Windows and Linux builds are pending due to lack of testing environments. Contributions from users with access to these platforms are more than welcome.
 
-[Download the latest release here](https://github.com/gwleuverink/phost/releases.)
+~~[Download the latest release here](https://github.com/gwleuverink/phost/releases)~~.
+
+⚠️ Phost is not released yet - The dev build is fully functional. If you'd like to get a sneak peek you can clone the repo and run it with `php artisan native:serve`
 
 ### Installation on macOS
 
