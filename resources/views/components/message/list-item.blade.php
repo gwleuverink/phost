@@ -50,7 +50,11 @@
                 'text-neutral-400 dark:text-neutral-200' => !$selected,
                 'text-neutral-500 dark:text-neutral-300' => $selected,
             ])>
-                {{ $message->created_at->diffForHumans() }}
+                @if ($message->created_at > now()->subMinute())
+                    Just now
+                @else
+                    {{ $message->created_at->diffForHumans() }}
+                @endif
             </p>
         </div>
 
