@@ -17,14 +17,12 @@ class MessageReceived implements ShouldBroadcastNow
 
     const NOTIFICATION_TITLE = "You've got Phost!";
 
-    public Message $message;
-
     public function __construct(string $content)
     {
-        $this->message = Message::fromContent($content);
+        $message = Message::fromContent($content);
 
         Notification::title(self::NOTIFICATION_TITLE)
-            ->message($this->message->parsed->getHeaderValue(HeaderConsts::SUBJECT))
+            ->message($message->parsed->getHeaderValue(HeaderConsts::SUBJECT))
             ->show();
     }
 
