@@ -10,12 +10,6 @@ it('returns a successful response')
     ->livewire(Inbox::class)
     ->assertOk();
 
-it('listens to server restart event')
-    ->livewire(Inbox::class)
-    ->set('online', true)
-    ->dispatch('restart-server')
-    ->assertSet('online', false);
-
 it('displays inbox-zero message when inbox is empty')
     ->livewire(Inbox::class)
     ->assertSee('Inbox zero 🎉');

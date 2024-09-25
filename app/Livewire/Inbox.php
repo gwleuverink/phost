@@ -13,7 +13,6 @@ use Native\Laravel\Facades\App;
 use App\Livewire\Concerns\Config;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Artisan;
 use App\Livewire\Concerns\MessageControls;
 
 /**
@@ -94,28 +93,6 @@ class Inbox extends Component
     //---------------------------------------------------------------
     // Listeners
     //---------------------------------------------------------------
-    #[On('restart-server')]
-    public function restartServer(?int $port = null)
-    {
-        $this->online = false;
-
-        $port = $port ?? $this->config->port;
-
-        // Kill stray processes on configured port
-        Server::new($port)->kill();
-
-        // NativePHP's supervisor seems to be delayed slightly.
-        // We'll invoke the serve command immediately and
-        // use the scheduler as a restart mechanism.
-        dispatch(function () {
-            Artisan::call('smtp:serve');
-        })->afterResponse();
-    }
-
-    /**
-     * This Event is passed to Livewire via IPC using a custom
-     * listener inside this component x-init attribute
-     */
     #[On('native:' . MessageReceived::class)]
     public function messageReceived()
     {
