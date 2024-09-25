@@ -42,7 +42,6 @@ class Server
             ->makePartial()
             ->shouldReceive('serve')
             ->shouldReceive('ping')
-            ->shouldReceive('kill')
         );
 
         app()->bind(self::class, fn () => $mock);

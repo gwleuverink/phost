@@ -3,11 +3,15 @@
 use App\Models\Message;
 use App\Settings\Config;
 use App\Livewire\Settings;
+use App\Services\Smtp\Server;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
 it('can change port')
+    ->defer(function () {
+        Server::new()->shouldReceive('kill');
+    })
     ->livewire(Settings::class)
     ->set('port', 2544)
     ->call('save')
@@ -17,6 +21,9 @@ it('can change port')
     });
 
 it('port must start with 25')
+    ->defer(function () {
+        Server::new()->shouldReceive('kill');
+    })
     ->livewire(Settings::class)
     ->set('port', 2099)
     ->call('save')
@@ -25,18 +32,22 @@ it('port must start with 25')
     ->call('save')
     ->assertHasNoErrors();
 
-it('emits server restart event when port changes')
+it('restarts server when port changes')
+    ->defer(function () {
+        Server::new()->shouldReceive('kill')->once();
+    })
     ->livewire(Settings::class)
     ->set('port', 2599)
     ->call('save')
-    ->assertHasNoErrors()
-    ->assertDispatched('restart-server');
+    ->assertHasNoErrors();
 
-it('doesnt emit server restart event when port doesnt change')
+it('doesnt restart server when port doesnt change')
+    ->defer(function () {
+        Server::new()->shouldNotReceive('kill');
+    })
     ->livewire(Settings::class)
     ->call('save')
-    ->assertHasNoErrors()
-    ->assertNotDispatched('restart-server');
+    ->assertHasNoErrors();
 
 it('can toggle color schemes')
     ->livewire(Settings::class)
