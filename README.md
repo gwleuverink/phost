@@ -7,10 +7,6 @@
 <a href="https://github.com/gwleuverink/phost/actions/workflows/codestyle.yml"><img src="https://github.com/gwleuverink/phost/actions/workflows/codestyle.yml/badge.svg" alt="Codestyle"></a>
 </p>
 
-> ⚠️ **Phost is not released yet**
->
-> There are a couple of things to work out with the production build.
-> The dev build is fully functional. If you'd like to get a sneak peek you can clone the repo and run it with `php artisan native:serve`. Please refer to the [NativePHP docs](https://nativephp.com/docs/1/getting-started/introduction) and check back here soon!
 
 ## About
 
@@ -39,9 +35,7 @@ While Phost may not yet match the feature set (or stability) of some paid altern
 
 At present, only a macOS build is available. Windows and Linux builds are pending due to lack of testing environments. Contributions from users with access to these platforms are more than welcome.
 
-~~[Download the latest release here](https://github.com/gwleuverink/phost/releases)~~.
-
-⚠️ Phost is not released yet - The dev build is fully functional. If you'd like to get a sneak peek you can clone the repo and run it with `php artisan native:serve`
+[Download the latest release here](https://github.com/gwleuverink/phost/releases).
 
 ### Installation on macOS
 
