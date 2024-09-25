@@ -3,14 +3,6 @@
     wire:poll.5s="heartbeat"
     {{-- Start SMTP server --}}
     wire:init="$dispatch('refresh-server')"
-    {{-- Reload UI when we receive a new message --}}
-    x-init="document.addEventListener('livewire:navigated', () => {
-        Helpers.ipcRenderer.on('log', (event, { level, message, context }) => {
-            if (message.startsWith('Broadcasting [App\\Events\\MessageReceived] on channels [nativephp]')) {
-                window.Livewire.dispatch('native:App\\Events\\MessageReceived')
-            }
-        })
-    })"
     {{-- Make sure we stay on the same page when refreshing (workaround for snappier UI) --}}
     x-on:keydown.meta.r.prevent="
         window.location.href = '/{{ $this->message?->id }}';
