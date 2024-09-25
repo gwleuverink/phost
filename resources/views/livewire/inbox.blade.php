@@ -1,8 +1,6 @@
 <main
     {{-- Poll for heartbeat --}}
     wire:poll.5s="heartbeat"
-    {{-- Start SMTP server --}}
-    wire:init="$dispatch('refresh-server')"
     {{-- Make sure we stay on the same page when refreshing (workaround for snappier UI) --}}
     x-on:keydown.meta.r.prevent="
         window.location.href = '/{{ $this->message?->id }}';
