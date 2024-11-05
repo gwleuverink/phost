@@ -12,7 +12,7 @@
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
-        "nativephp/electron": "^0.7.2",
+        "nativephp/electron": "^0.8.1",
         "blade-ui-kit/blade-heroicons": "^2.3",
         "react/socket": "^1.15",
         "spatie/laravel-settings": "^3.3",
