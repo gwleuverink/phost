@@ -188,6 +188,7 @@ class Server
 
     /**
      * Stops the currently running server
+     * NOTE: Not used since introduction Native ChildProcesses
      */
     public function stop(): void
     {
@@ -201,6 +202,7 @@ class Server
 
     /**
      * Tries to kill the process on the configured Port nr.
+     * NOTE: Not used since introduction Native ChildProcesses
      */
     public function kill(): void
     {
@@ -228,6 +230,7 @@ class Server
 
     /**
      * Check if a process is alive on the configured port
+     * NOTE: Not used since introduction Native ChildProcesses
      */
     public function ping(): bool
     {

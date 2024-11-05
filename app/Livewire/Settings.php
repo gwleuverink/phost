@@ -9,6 +9,7 @@ use App\Services\Smtp\Server;
 use App\Livewire\Concerns\Config;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
+use Native\Laravel\Facades\ChildProcess;
 
 /**
  * Note that the property casing is non-standard, because we're mapping directly to the config object
@@ -46,6 +47,7 @@ class Settings extends Component
 
         // Stop the server & restart picked up by the scheduler
         if ($this->port !== $oldPort) {
+            ChildProcess::stop('smtp-server');
             Server::new($oldPort)->kill();
         }
     }
