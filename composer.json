@@ -12,7 +12,7 @@
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
-        "nativephp/electron": "^0.7.2",
+        "nativephp/electron": "^0.8.7",
         "blade-ui-kit/blade-heroicons": "^2.3",
         "react/socket": "^1.15",
         "spatie/laravel-settings": "^3.3",
@@ -74,7 +74,11 @@
         "lint": "vendor/bin/duster lint",
         "fix": "vendor/bin/duster fix",
         "analyze": "vendor/bin/phpstan analyse",
-        "baseline": "vendor/bin/phpstan analyse --generate-baseline"
+        "baseline": "vendor/bin/phpstan analyse --generate-baseline",
+        "native:dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -k -c \"#93c5fd,#c4b5fd\" \"php artisan native:serve --no-interaction\" \"npm run dev\" --names=app,vite"
+        ]
     },
     "extra": {
         "laravel": {

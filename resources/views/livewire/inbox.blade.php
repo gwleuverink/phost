@@ -1,6 +1,9 @@
 <main
-    {{-- Poll for heartbeat --}}
-    wire:poll.5s="heartbeat"
+    {{-- When the initial server status is offline, we ping a heartbeat, which checks the status & restarts the server process if needed --}}
+    @unless ($online)
+        wire:init="heartbeat"
+        wire:poll.3s="heartbeat"
+    @endunless
     {{-- Make sure we stay on the same page when refreshing (workaround for snappier UI) --}}
     x-on:keydown.meta.r.prevent="
         window.location.href = '/{{ $this->message?->id }}';

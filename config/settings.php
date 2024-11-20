@@ -1,6 +1,6 @@
 <?php
 
-use App\Settings\Preferences;
+use App\Settings\Config;
 
 return [
 
@@ -9,7 +9,7 @@ return [
      * put them (manually) here.
      */
     'settings' => [
-        Preferences::class,
+        Config::class,
     ],
 
     /*

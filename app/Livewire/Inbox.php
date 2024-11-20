@@ -6,14 +6,16 @@ use App\Models\Message;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
-use App\Services\Smtp\Server;
 use Livewire\Attributes\Title;
 use App\Events\MessageReceived;
 use Native\Laravel\Facades\App;
 use App\Livewire\Concerns\Config;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Collection;
+use Native\Laravel\Facades\ChildProcess;
 use App\Livewire\Concerns\MessageControls;
+use Native\Laravel\Events\ChildProcess\ProcessExited;
+use Native\Laravel\Events\ChildProcess\ProcessSpawned;
 
 /**
  * @property ?Message $message
@@ -53,18 +55,6 @@ class Inbox extends Component
         $this->updateBadgeCount();
     }
 
-    public function heartbeat()
-    {
-        $online = Server::new($this->config->port)->ping();
-
-        // Skip rerender whe the online status didn't change
-        if ($this->online === $online) {
-            $this->skipRender();
-        }
-
-        $this->online = $online;
-    }
-
     //---------------------------------------------------------------
     // Computed properties
     //---------------------------------------------------------------
@@ -99,9 +89,51 @@ class Inbox extends Component
         $this->updateBadgeCount();
     }
 
+    #[On('native:' . ProcessSpawned::class)]
+    public function serverStarted($alias)
+    {
+        if ($alias !== 'smtp-server') {
+            return $this->skipRender();
+        }
+
+        $this->online = true;
+    }
+
+    #[On('native:' . ProcessExited::class)]
+    public function serverStopped($alias)
+    {
+        if ($alias !== 'smtp-server') {
+            return $this->skipRender();
+        }
+
+        $this->online = false;
+    }
+
     //---------------------------------------------------------------
     // System
     //---------------------------------------------------------------
+    public function heartbeat()
+    {
+        (bool) ChildProcess::get('smtp-server')
+            ? $this->online = true
+            : $this->startServer();
+    }
+
+    protected function startServer()
+    {
+        // Better to  mock this method instead, but since this should be handled
+        // by NativePHP (maybe in future) just keep it simple.
+        if (app()->runningUnitTests()) {
+            return;
+        }
+
+        ChildProcess::artisan(
+            cmd: 'smtp:serve',
+            alias: 'smtp-server',
+            persistent: false // Let livewire handle restarts
+        );
+    }
+
     protected function updateBadgeCount()
     {
         // Better to  mock this method instead, but since this should be handled
