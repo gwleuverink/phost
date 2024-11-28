@@ -6,7 +6,7 @@ return [
      * It is used to determine if the app needs to be updated.
      * Increment this value every time you release a new version of your app.
      */
-    'version' => env('NATIVEPHP_APP_VERSION', '0.1.3'),
+    'version' => env('NATIVEPHP_APP_VERSION', '0.1.4'),
 
     /**
      * The ID of your application. This should be a unique identifier
