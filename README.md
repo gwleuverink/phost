@@ -39,12 +39,24 @@ At present, only a macOS build is available. Windows and Linux builds are pendin
 
 ### Installation on macOS
 
-Please note that the current build is neither signed nor notarized. To run the app for the first time after installation:
+Please note that the current build is neither signed nor notarized. Gatekeeper flags the app and will the app is "damaged". Don't worry, it is not.
+To run the app for the first time after installation you'll need to manually move it out of quarantine:
 
-1. Locate the app in Finder
-2. Control-click (or right-click) the app icon
-3. Select 'Open' from the context menu
-4. Click 'Open' in the dialog box that appears
+Open your teminal and enter the following command:
+
+`xattr -c /Applications/Phost.app`
+
+You should now be able to start Phost normally. 
+
+<br />
+
+**Troublehooting**
+
+If you still have trouble starting Phost try the following:
+
+1. Control-click (or right-click) the app icon
+2. Select 'Open' from the context menu
+3. Click 'Open' in the dialog box that appears
 
 This process saves the app as an exception to your security settings. Thereafter, you can launch it by double-clicking, like any other registered app.
 
