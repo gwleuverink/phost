@@ -39,7 +39,7 @@ At present, only a macOS build is available. Windows and Linux builds are pendin
 
 ### Installation on macOS
 
-Please note that the current build is neither signed nor notarized. Gatekeeper flags the app and will the app is "damaged". Don't worry, it is not.
+Please note that the current build is neither signed nor notarized. Gatekeeper flags the app and will warn you that the app is "damaged". Don't worry, it is not.
 To run the app for the first time after installation you'll need to manually move it out of quarantine:
 
 Open your teminal and enter the following command:
