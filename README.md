@@ -11,7 +11,7 @@
 ## About
 
 Phost is a email debugging tool and local SMTP server, developed primarily in PHP. 
-instead of sending your development emails to Mailtrap or MailHog, you can use Phost to debug your emails inside a beautiful self-contained desktop app.
+Instead of sending your development emails to Mailtrap or MailHog, you can use Phost to debug your emails inside a beautiful self-contained desktop app.
 
 We leverage a powerful stack of modern technologies:
 
