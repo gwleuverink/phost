@@ -9,11 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "blade-ui-kit/blade-heroicons": "^2.3",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
-        "nativephp/electron": "^0.8.7",
-        "blade-ui-kit/blade-heroicons": "^2.3",
+        "nativephp/electron": "^1.0.0",
         "react/socket": "^1.15",
         "spatie/laravel-settings": "^3.3",
         "zbateson/mail-mime-parser": "^2.4"
@@ -94,6 +94,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "prefer-stable": true
 }
