@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Native\Laravel\Http\Middleware\PreventRegularBrowserAccess;
 
 return Application::configure(basePath: dirname(__DIR__))
 
@@ -17,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
 
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->append(PreventRegularBrowserAccess::class);
     })
 
     ->withExceptions(function (Exceptions $exceptions) {
