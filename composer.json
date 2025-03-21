@@ -1,10 +1,12 @@
 {
-    "name": "laravel/laravel",
+    "name": "gwleuverink/phost",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Email debugging tool and local SMTP server",
     "keywords": [
-        "laravel",
-        "framework"
+        "smtp-server",
+        "tooling",
+        "email-debugging",
+        "nativephp"
     ],
     "license": "MIT",
     "require": {
@@ -13,7 +15,7 @@
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
-        "nativephp/electron": "^1.0.0",
+        "nativephp/electron": "^1.0",
         "react/socket": "^1.15",
         "spatie/laravel-settings": "^3.3",
         "zbateson/mail-mime-parser": "^2.4"
@@ -94,6 +96,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
