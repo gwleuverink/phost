@@ -10,7 +10,10 @@
 
 ## About
 
-Phost is an email debugging tool and local SMTP server, developed primarily in PHP. It leverages a powerful stack of modern technologies:
+Phost is a email debugging tool and local SMTP server, developed primarily in PHP. 
+Instead of sending your development emails to Mailtrap or MailHog, you can use Phost to debug your emails inside a beautiful self-contained desktop app.
+
+We leverage a powerful stack of modern technologies:
 
 -   [**Laravel/Livewire**](https://livewire.laravel.com/) -> For dynamic, reactive interface
 -   [**NativePHP**](https://nativephp.com/) -> Electron wrapper for PHP built apps
@@ -37,29 +40,6 @@ At present, only a macOS build is available. Windows and Linux builds are pendin
 
 [Download the latest release here](https://github.com/gwleuverink/phost/releases).
 
-### Installation on macOS
+## Supporting the Project
 
-Please note that the current build is neither signed nor notarized. Gatekeeper flags the app and will warn you that the app is "damaged". Don't worry, it is not.
-To run the app for the first time after installation you'll need to manually move it out of quarantine:
-
-Open your teminal and enter the following command:
-
-`xattr -c /Applications/Phost.app`
-
-You should now be able to start Phost normally. 
-
-<br />
-
-**Troublehooting**
-
-If you still have trouble starting Phost try the following:
-
-1. Control-click (or right-click) the app icon
-2. Select 'Open' from the context menu
-3. Click 'Open' in the dialog box that appears
-
-This process saves the app as an exception to your security settings. Thereafter, you can launch it by double-clicking, like any other registered app.
-
-### Security Considerations
-
-I understand if you have reservations about running unverified applications. This project is currently in an experimental phase, and I have not yet invested in an Apple Developer Account for code-signing. Future notarization depends on community support through [GitHub Sponsors](https://github.com/sponsors/gwleuverink). Your support is greatly appreciated! 🙏
+To distribute Phost on macOS, the application needs to be signed and notarized through the Apple Developer Program, which costs €100 annually. If you find Phost useful, please consider supporting its development and maintenance through [GitHub Sponsors](https://github.com/sponsors/gwleuverink). Your support helps cover these costs and enables continued development of this open-source tool.
