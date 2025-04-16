@@ -10,7 +10,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "blade-ui-kit/blade-heroicons": "^2.3",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
@@ -80,6 +80,17 @@
         "native:dev": [
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -k -c \"#93c5fd,#c4b5fd\" \"php artisan native:serve --no-interaction\" \"npm run dev\" --names=app,vite"
+        ],
+        "native:bundle": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer run-script post-install-cmd",
+            "npm run build",
+            "@php artisan native:bundle"
+        ],
+        "native:publish": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php artisan native:bundle --fetch",
+            "@php artisan native:publish mac all"
         ]
     },
     "extra": {
@@ -96,6 +107,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
