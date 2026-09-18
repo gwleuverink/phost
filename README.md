@@ -40,6 +40,8 @@ At present, only a macOS build is available. Windows and Linux builds are pendin
 
 [Download the latest release here](https://github.com/gwleuverink/phost/releases).
 
+Phost listens on port `2525` by default for incoming SMTP connections.
+
 ## Supporting the Project
 
 To distribute Phost on macOS, the application needs to be signed and notarized through the Apple Developer Program, which costs €100 annually. If you find Phost useful, please consider supporting its development and maintenance through [GitHub Sponsors](https://github.com/sponsors/gwleuverink). Your support helps cover these costs and enables continued development of this open-source tool.
